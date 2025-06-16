@@ -4,7 +4,8 @@
 # include <stddef.h>
 # include <stdlib.h>
 
-char	**ft_swap_first(char	**stack_a);
+char	**ft_swap(char	**stack_a);
 size_t	ft_dptr_len(char **dptr);
+char	**ft_push(char **stack_a, char **stack_b);
 
 #endif
