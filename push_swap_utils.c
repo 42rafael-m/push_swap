@@ -52,6 +52,27 @@ char	**ft_push(char **stack_a, char **stack_b)
 	return (stack_a); 
 }
 
+char	**ft_rotate(char **stack)
+{
+	char	*first;
+	size_t	len;
+	int	i;
+
+	i = 0;
+	if (!stack)
+		return (NULL);
+	first = stack[0];
+	len = ft_dptr_len(stack);
+	while (i < len - 1)
+	{
+		stack[i] = stack[i + 1];
+		i++;
+	}
+	stack[i] = first;
+	return (stack);
+}
+
+// #include <stdio.h>
 // int	main()
 // {
 // 	char **s = (char **)calloc(4, sizeof(char *));
@@ -64,7 +85,7 @@ char	**ft_push(char **stack_a, char **stack_b)
 // 	s2[1] = ft_strdup("-44");
 // 	s2[2] = ft_strdup("0");
 // 	s2[3] = NULL;
-// 	s = ft_push(s, s2);
+// 	s = ft_rotate(s);
 // 	int i = 0;
 // 	while (i < 4)
 // 	{
