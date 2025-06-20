@@ -12,7 +12,7 @@ size_t	ft_dptr_len(char **dptr)
 	return (i);
 }
 
-char	**ft_swap_(char	**stack)
+char	**ft_swap(char	**stack)
 {
 	int	i;
 	char	**r;
@@ -90,7 +90,7 @@ char	**ft_rotate(char **stack)
 	return (stack);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 int	main()
 {
 	char **s = (char **)calloc(4, sizeof(char *));
@@ -116,4 +116,4 @@ int	main()
 	}
 	free (s);
 	ft_free_d(s2);
-}
+} */
