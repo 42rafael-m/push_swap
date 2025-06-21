@@ -21,7 +21,7 @@ int ft_valid_args(int argc, char **argv)
                 return (1);
             i++;
         }
-        if (argv[argc][0] != 0 && ft_atoi(argv[argc] == 0))
+        if (argv[argc][0] != 0 && ft_atoi(argv[argc]) == 0)
             return (1);
         argc--;
     }
@@ -31,22 +31,26 @@ int ft_valid_args(int argc, char **argv)
 char    **ft_stack(int argc, char **argv)
 {
     char    **stack;
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
     if (!argv)
         return (NULL);
     stack = (char **)ft_calloc(argc, sizeof(char *));
     if (!stack)
         return (NULL);
-    argc--;
-    while (argv[argc] > 0)
+    while (i < (argc - 1))
     {
-        stack[argc] = ft_strdup(argv[argc]);
-        if (!stack[argc])
+		// write(1, ft_strdup(argv[i + 1]), ft_strlen(argv[i + 1]));
+        stack[i] = ft_strdup(argv[i + 1]);
+        if (!stack[i])
             return (NULL);
-        argc--;
+		// write(1, stack[i], ft_strlen(stack[i]));
+		// write(1, "\n", 1);
+        i++;
     }
+	stack[i] = NULL;
+	return (stack);
 }
 
 int main(int argc, char **argv)
@@ -56,13 +60,20 @@ int main(int argc, char **argv)
 
     if (argc <= 1)
         return (write(2, "Error\n", 6), 1);
-    if (ft_valid_args == 1)
+    if (ft_valid_args(argc, argv) == 1)
         return (write(2, "Error\n", 6), 1);
     stack_a = ft_stack(argc, argv);
     if (!stack_a)
-        return (1);
-    stack_b = (char *)ft_calloc(argc, sizeof(char));
+        return (write(2, "Error\n", 6), 3);
+    stack_b = (char **)ft_calloc(argc, sizeof(char *));
     if (!stack_b)
-        return (1);
+        return (write(2, "Error\n", 6), 1);
+		int i = 0;
+    while (stack_a[i])
+	{
+		write(1, stack_a[i], ft_strlen(stack_a[i]));
+		write(1, "\n", 1);
+		i++;
+	}
     return (0);
 }

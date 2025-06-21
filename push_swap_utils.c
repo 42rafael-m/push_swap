@@ -41,7 +41,6 @@ char	**ft_swap_s(char	**stack)
 char	**ft_push(char **stack_a, char **stack_b)
 {
 	char	*t;
-	size_t	len;
 
 	if (!stack_b)
 		return (stack_a);
