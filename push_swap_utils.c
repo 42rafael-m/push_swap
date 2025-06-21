@@ -12,7 +12,7 @@ size_t	ft_dptr_len(char **dptr)
 	return (i);
 }
 
-char	**ft_swap(char	**stack)
+char	**ft_swap_s(char	**stack)
 {
 	int	i;
 	char	**r;
@@ -74,7 +74,7 @@ char	**ft_rotate(char **stack)
 {
 	char	*first;
 	size_t	len;
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!stack)
