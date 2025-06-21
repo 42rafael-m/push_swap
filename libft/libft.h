@@ -93,5 +93,6 @@ void		ft_free_d(char **ptr);
 char		*ft_strnchr(const char *s, int c, unsigned int n);
 char		*ft_esc_char(char *s);
 void   		ft_free_prev_d(char **s, int pos);
+long		ft_atol(char *s);
 
 #endif

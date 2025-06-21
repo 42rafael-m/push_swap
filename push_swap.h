@@ -3,6 +3,7 @@
 
 # include <stddef.h>
 # include <stdlib.h>
+# include <limits.h>
 
 # define INV_CHARS " !\"#$%&'()*./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"

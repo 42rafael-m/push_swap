@@ -18,6 +18,8 @@ int ft_valid_args(int argc, char **argv)
             return (1);
         while (i < ft_strlen(argv[argc]))
         {
+			if (ft_atol(argv[argc]) > INT_MAX || ft_atol(argv[argc]) < INT_MIN)
+				return (1);
             if (ft_strchr(INV_CHARS, argv[argc][i]))
                 return (1);
             i++;
@@ -42,12 +44,9 @@ char    **ft_stack(int argc, char **argv)
         return (NULL);
     while (i < (argc - 1))
     {
-		// write(1, ft_strdup(argv[i + 1]), ft_strlen(argv[i + 1]));
         stack[i] = ft_strdup(argv[i + 1]);
         if (!stack[i])
             return (NULL);
-		// write(1, stack[i], ft_strlen(stack[i]));
-		// write(1, "\n", 1);
         i++;
     }
 	stack[i] = NULL;
