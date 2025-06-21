@@ -1,4 +1,5 @@
 #include "libft/libft.h"
+#include "push_swap.h"
 
 size_t	ft_dptr_len(char **dptr)
 {
@@ -12,61 +13,36 @@ size_t	ft_dptr_len(char **dptr)
 	return (i);
 }
 
-char	**ft_swap_s(char	**stack)
+void	ft_swap_s(t_list **stack)
 {
-	int	i;
-	char	**r;
+	t_list	*node;
 
-	i = 2;
-	if (!stack)
-		return (NULL);
-	if (ft_dptr_len(stack) <= 1)
-		return (NULL);
-	r = (char **)ft_calloc(ft_dptr_len(stack) + 1, sizeof(char *));
-	if (!r)
-		return (NULL);
-	r[0] = ft_strdup(stack[1]);
-	r[1] = ft_strdup(stack[0]);
-	while (stack[i])
-	{
-		r[i] = ft_strdup(stack[i]);
-		i++;
-	}
-	r[i] = NULL;
-	free (stack);
-	stack = NULL;
-	return (r);
+	if (!*stack || !(*stack) -> next)
+		return ;
+	node = (*stack) -> next;
+	(*stack) -> next = node -> next;
+	node -> next = *stack;
+	*stack = node;
+	return ;
 }
 
-char	**ft_push(char **stack_a, char **stack_b)
+void	ft_push(t_list **stack_a, t_list **stack_b)
 {
-	char	*t;
+	t_list	*t;
 
-	if (!stack_b)
-		return (stack_a);
-	t = stack_a[0];
-	stack_a[0] = ft_strdup(stack_b[0]);
-	free(t);
-	t = NULL;
-	return (stack_a); 
+	if (!*stack_b)
+		return ;
+	t = *stack_b;
+	*stack_b = t -> next;
+	t -> next = *stack_a;
+	*stack_a = t;
+	return ; 
 }
 
-char	**ft_rev_rot(char **stack)
+void	ft_rev_rot(t_list *stack)
 {
-	char	*last;
-	size_t	len;
-
-	if (!stack)
-		return (NULL);
-	len = ft_dptr_len(stack) - 1;
-	last = stack[len];
-	while (len > 0)
-	{
-		stack[len] = stack[len - 1];
-		len--;
-	}
-	stack[0] = last;
-	return (stack);
+	
+	return ;
 }
 
 char	**ft_rotate(char **stack)
