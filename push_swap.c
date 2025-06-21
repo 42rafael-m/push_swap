@@ -1,5 +1,6 @@
 #include "libft/libft.h"
 #include "push_swap.h"
+#include <stdio.h>
 
 int ft_valid_args(int argc, char **argv)
 {
@@ -13,7 +14,7 @@ int ft_valid_args(int argc, char **argv)
     while (argc > 0)
     {
         len = ft_strlen(argv[argc]);
-        if (!len)
+        if (!len && argv[argc][0] != 0)
             return (1);
         while (i < ft_strlen(argv[argc]))
         {
@@ -21,7 +22,7 @@ int ft_valid_args(int argc, char **argv)
                 return (1);
             i++;
         }
-        if (argv[argc][0] != 0 && ft_atoi(argv[argc]) == 0)
+        if ((argv[argc][0] != 48) && (ft_atoi(argv[argc]) == 0))
             return (1);
         argc--;
     }
