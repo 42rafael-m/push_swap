@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include <stdio.h>
 
 int	ft_push_swap(t_list *stack_a, t_list *stack_b)
 {
@@ -14,7 +13,8 @@ int	ft_push_swap(t_list *stack_a, t_list *stack_b)
     ordered_list = ft_quickshort(stack_a);
     while (ordered_list)
     {
-        printf("%d\n", *(int *)ordered_list -> content);
+        // printf("%p\n", ordered_list);
+        // printf("%d\n", *(int *)ordered_list -> content);
         ordered_list = ordered_list -> next;
     }
     t = stack_a;
@@ -25,7 +25,7 @@ int	ft_push_swap(t_list *stack_a, t_list *stack_b)
     }
     pivot = *(int *)t -> content;
     ft_lstsize(stack_b);
-    printf("%d\n", pivot);
+    printf("pivot = %d\n", pivot);
     return (0);
 }
 
@@ -70,7 +70,7 @@ t_list    *ft_stack(int argc, char **argv)
         return (NULL);
 	    node = NULL;
 	stack = node;
-    while (i < (argc - 1))
+    while (i < (argc))
     {
         content = (int *)ft_calloc(1, sizeof(int)); 
         *content = ft_atoi(argv[i]);
@@ -101,13 +101,5 @@ int main(int argc, char **argv)
     if (!stack_b)
         return (write(2, "Error\n", 6), 1);
     ft_push_swap(stack_a, stack_b);
-	// int i = 0;
-    // while (stack_a[i])
-	// {
-	// 	write(1, stack_a[i], ft_strlen(stack_a[i]));
-	// 	write(1, "\n", 1);
-	// 	i++;
-	// }
-
     return (0);
 }

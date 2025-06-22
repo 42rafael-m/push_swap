@@ -6,6 +6,8 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+#include <stdio.h>
+
 # define INV_CHARS " !\"#$%&'()*./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"
 
