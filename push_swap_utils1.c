@@ -71,8 +71,8 @@ t_list	*ft_quickshort(t_list *list)
 			ft_lstadd_back(&big_list, new_list);
 		list = list -> next;
 	}
-	new_list = ft_quicksort(low_list);
+	new_list = ft_quickshort(low_list);
 	ft_lstadd_back(&new_list, pivot_node);
-	ft_lstadd_back(&new_list, ft_quicksort(big_list));
+	ft_lstadd_back(&new_list, ft_quickshort(big_list));
 	return (new_list);
 }

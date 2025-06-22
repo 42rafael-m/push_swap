@@ -1,8 +1,8 @@
 NAME = push_swap
 LIBFT_A = libft/libft.a
-SRC = push_swap.c push_swap_utils.c
+SRC = push_swap.c push_swap_utils.c push_swap_utils1.c
 OBJ = $(SRC:.c=.o)
-CFLAGS += -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra -Werror -Ilibft
 
 all: $(NAME)
 
@@ -10,18 +10,18 @@ $(NAME): $(LIBFT_A) $(OBJ)
 	cc $(CFLAGS) $(OBJ) $(LIBFT_A) -o $(NAME)
 
 $(LIBFT_A):
-	make -C libft
+	$(MAKE) bonus -C libft
 
 %.o: %.c
 	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm  -f $(OBJ) libft.a
-	make clean -C libft
+	rm  -f $(OBJ)
+	$(MAKE) clean -C libft
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C libft
+	$(MAKE) fclean -C libft
 
 re: fclean all
 

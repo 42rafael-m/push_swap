@@ -13,7 +13,9 @@ void    ft_swap_s(t_list    **stack_a);
 void    ft_push(t_list **stack_a, t_list **stack_b);
 void    ft_rev_rot(t_list **stack);
 void    ft_rotate(t_list **stack);
-int     ft_push_swap(t_list **stack_a, t_list **stack_b, int argc);
+int     ft_push_swap(t_list *stack_a, t_list *stack_b);
 void	*ft_copy_content(void *content);
+t_list	*ft_quickshort(t_list *list);
+int	    ft_choose_pivot(t_list *list);
 
 #endif

@@ -58,8 +58,6 @@ void	ft_rotate(t_list **stack)
 	return ;
 }
 
-void	ft_ads();
-
 /* #include <stdio.h>
 int	main()
 {

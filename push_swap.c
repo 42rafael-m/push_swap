@@ -1,9 +1,32 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int	ft_push_swap(char **stack_a, char **stack_b, int argc)
+int	ft_push_swap(t_list *stack_a, t_list *stack_b)
 {
+    t_list  *ordered_list;
+    t_list  *t;
+    int i;
+    int size;
+    int pivot;
 
+    i = 0;
+    size = ft_lstsize(stack_a);
+    ordered_list = ft_quickshort(stack_a);
+    while (ordered_list)
+    {
+        printf("%d\n", *(int *)ordered_list -> content);
+        ordered_list = ordered_list -> next;
+    }
+    t = stack_a;
+    while (i < size && stack_a -> next)
+    {
+        t = stack_a -> next;
+        i++;
+    }
+    pivot = *(int *)t -> content;
+    ft_lstsize(stack_b);
+    printf("%d\n", pivot);
+    return (0);
 }
 
 int ft_valid_args(int argc, char **argv)
@@ -45,7 +68,7 @@ t_list    *ft_stack(int argc, char **argv)
 	i = 1;
     if (!argv || argc <= 1)
         return (NULL);
-	node = NULL;
+	    node = NULL;
 	stack = node;
     while (i < (argc - 1))
     {
@@ -77,6 +100,7 @@ int main(int argc, char **argv)
     stack_b = ft_lstnew(&content);
     if (!stack_b)
         return (write(2, "Error\n", 6), 1);
+    ft_push_swap(stack_a, stack_b);
 	// int i = 0;
     // while (stack_a[i])
 	// {
