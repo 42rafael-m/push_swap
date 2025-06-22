@@ -4,6 +4,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <limits.h>
+# include "libft/libft.h"
 
 # define INV_CHARS " !\"#$%&'()*./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"
@@ -13,5 +14,6 @@ void    ft_push(t_list **stack_a, t_list **stack_b);
 void    ft_rev_rot(t_list **stack);
 void    ft_rotate(t_list **stack);
 int     ft_push_swap(t_list **stack_a, t_list **stack_b, int argc);
+void	*ft_copy_content(void *content);
 
 #endif

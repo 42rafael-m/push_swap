@@ -1,14 +1,9 @@
-#include "libft/libft.h"
 #include "push_swap.h"
 #include <stdio.h>
 
 int	ft_push_swap(char **stack_a, char **stack_b, int argc)
 {
-	int	pos_i;
-	int	pos_f;
 
-	pos_i = 0;
-	pos_f = 0;
 }
 
 int ft_valid_args(int argc, char **argv)
