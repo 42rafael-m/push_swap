@@ -8,11 +8,10 @@
 # define INV_CHARS " !\"#$%&'()*./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"
 
-size_t	ft_dptr_len(char **dptr);
-char	**ft_swap_s(char	**stack_a);
-char	**ft_push(char **stack_a, char **stack_b);
-char	**ft_rev_rot(char **stack);
-char	**ft_rotate(char **stack);
-int     ft_push_swap(char **stack_a, char **stack_b, int argc);
+void    ft_swap_s(t_list    **stack_a);
+void    ft_push(t_list **stack_a, t_list **stack_b);
+void    ft_rev_rot(t_list **stack);
+void    ft_rotate(t_list **stack);
+int     ft_push_swap(t_list **stack_a, t_list **stack_b, int argc);
 
 #endif

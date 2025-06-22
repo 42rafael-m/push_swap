@@ -40,27 +40,26 @@ int ft_valid_args(int argc, char **argv)
     return (0);
 }
 
-t_list    **ft_stack(int argc, char **argv)
+t_list    *ft_stack(int argc, char **argv)
 {
-    t_list	**stack;
+    t_list	*stack;
 	t_list	*node;
-	int	content;
+	int	*content;
 	int	i;
 
 	i = 1;
     if (!argv || argc <= 1)
         return (NULL);
 	node = NULL;
-	stack = &node;
+	stack = node;
     while (i < (argc - 1))
     {
-        content = ft_atoi(argv[i]);
-		node = ft_lstnew(&content);
+        content = (int *)ft_calloc(1, sizeof(int)); 
+        *content = ft_atoi(argv[i]);
+		node = ft_lstnew(content);
 		if (!node)
-			return (NULL);
-		ft_lstadd_back(stack, node);
-        if (!stack)
-            return (NULL);
+			return (free(content), NULL);
+		ft_lstadd_back(&stack, node);
         i++;
     }
 	return (stack);
@@ -68,8 +67,9 @@ t_list    **ft_stack(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-    char    **stack_a;
-    char    **stack_b;
+    t_list    *stack_a;
+    t_list    *stack_b;
+    int content;
 
     if (argc <= 1)
         return (write(2, "Error\n", 6), 1);
@@ -78,10 +78,11 @@ int main(int argc, char **argv)
     stack_a = ft_stack(argc, argv);
     if (!stack_a)
         return (write(2, "Error\n", 6), 3);
-    stack_b = (char **)ft_calloc(argc, sizeof(char *));
+    content = 0;
+    stack_b = ft_lstnew(&content);
     if (!stack_b)
         return (write(2, "Error\n", 6), 1);
-		int i = 0;
+	// int i = 0;
     // while (stack_a[i])
 	// {
 	// 	write(1, stack_a[i], ft_strlen(stack_a[i]));

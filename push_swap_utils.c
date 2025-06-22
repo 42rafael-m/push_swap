@@ -1,18 +1,6 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-size_t	ft_dptr_len(char **dptr)
-{
-	int	i;
-
-	i = 0;
-	if (!dptr)
-		return (0);
-	while (dptr[i])
-		i++;
-	return (i);
-}
-
 void	ft_swap_s(t_list **stack)
 {
 	t_list	*node;
@@ -39,30 +27,36 @@ void	ft_push(t_list **stack_a, t_list **stack_b)
 	return ; 
 }
 
-void	ft_rev_rot(t_list *stack)
+void	ft_rev_rot(t_list **stack)
 {
-	
+	t_list	*t;
+	t_list	*node;
+
+	if (!*stack || !(*stack) -> next)
+		return ;
+	node = *stack;
+	t = ft_lstlast(*stack);
+	t -> next = node;
+	while (node && (node -> next) -> next)
+		node = node -> next;
+	node -> next = NULL;
+	*stack = t;
 	return ;
 }
 
-char	**ft_rotate(char **stack)
+void	ft_rotate(t_list **stack)
 {
-	char	*first;
-	size_t	len;
-	size_t	i;
+	t_list	*t;
+	t_list	*start;
 
-	i = 0;
-	if (!stack)
-		return (NULL);
-	first = stack[0];
-	len = ft_dptr_len(stack);
-	while (i < len - 1)
-	{
-		stack[i] = stack[i + 1];
-		i++;
-	}
-	stack[i] = first;
-	return (stack);
+	if (!*stack || !(*stack) -> next)
+		return ;
+	start = *stack;
+	*stack = start -> next; 
+	t = ft_lstlast(*stack);
+	t -> next = start;
+	start -> next = NULL;
+	return ;
 }
 
 /* #include <stdio.h>
