@@ -1,5 +1,7 @@
 #include "push_swap.h"
 
+
+
 void	*ft_copy_content(void *content)
 {
 	int	*copy;
@@ -36,33 +38,21 @@ int	ft_choose_pivot(t_list *list)
 	return (c);
 }
 
-t_list	*ft_quickshort(t_list *list)
+t_list	*ft_sort(t_list	*list, int pivot)
 {
-	int pivot;
 	t_list	*low_list;
 	t_list	*big_list;
-	t_list	*t;
 	t_list	*new_list;
 	t_list	*pivot_node;
-	
+
 	low_list = NULL;
 	big_list = NULL;
 	pivot_node = NULL;
-	if (!list -> next)
-		return (list);
-	if (!(list -> next) -> next && list -> content < (list -> next) -> content)
-		return (list);
-	if (!(list -> next) -> next && list -> content > (list -> next) -> content)
-	{
-		t = list;
-		list = list -> next;
-		list -> next = t;
-		return (list);
-	}
-	pivot = ft_choose_pivot(list);
 	while (list)
 	{
 		new_list = ft_lstnew(ft_copy_content(list -> content));
+		if (!new_list)
+			return (NULL);
 		if (*(int *)new_list -> content < pivot)
 			ft_lstadd_back(&low_list, new_list);
 		else if (*(int *)new_list -> content == pivot)
@@ -74,5 +64,29 @@ t_list	*ft_quickshort(t_list *list)
 	new_list = ft_quickshort(low_list);
 	ft_lstadd_back(&new_list, pivot_node);
 	ft_lstadd_back(&new_list, ft_quickshort(big_list));
+	return (new_list);
+}
+
+t_list	*ft_quickshort(t_list *list)
+{
+	int pivot;
+	t_list	*t;
+	t_list	*new_list;
+	
+	if (!list)
+		return (NULL);
+	if (!list -> next)
+		return (list);
+	if (!(list -> next) -> next && *(int *)list -> content < *(int *)(list -> next) -> content)
+		return (list);
+	if (!(list -> next) -> next && *(int *)list -> content > *(int *)(list -> next) -> content)
+	{
+		t = list;
+		list = list -> next;
+		list -> next = t;
+		return (list);
+	}
+	pivot = ft_choose_pivot(list);
+	new_list = ft_sort(list, pivot);
 	return (new_list);
 }

@@ -119,6 +119,7 @@ int main(int argc, char **argv)
     stack_b = ft_load_stackn(argc / 2);
     if (!stack_b)
         return (write(2, "Error\n", 6), 1);
+    if (argc)
     ft_push_swap(&stack_a, &stack_b);
     return (0);
 }
