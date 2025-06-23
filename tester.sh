@@ -1,1 +1,48 @@
 #!/bin/bash
+
+> log.txt
+for line in {1..2}
+do
+    echo "2 números línea=$line" >> log.txt
+    value=$(./push_swap $(awk -v num="$line" 'NR==num {gsub(/"/, ""); print}' bigtests.txt) | wc -l| xargs)
+    if [ "$value" -gt 1 ]; then
+        echo "KO $value" >> log.txt
+    else
+        echo "OK $value" >> log.txt
+    fi
+done
+
+for line in {4..7}
+do
+    echo "3 números línea=$line" >> log.txt
+    value=$(./push_swap $(awk -v num="$line" 'NR==num {gsub(/"/, ""); print}' bigtests.txt) | wc -l| xargs)
+    if [ "$value" -gt 1 ]; then
+        echo "KO $value" >> log.txt
+    else
+        echo "OK $value" >> log.txt
+    fi
+done
+
+for line in {9..32}
+do
+    echo "3 números línea=$line" >> log.txt
+    value=$(./push_swap $(awk -v num="$line" 'NR==num {gsub(/"/, ""); print}' bigtests.txt) | wc -l| xargs)
+    if [ "$value" -gt 1 ]; then
+        echo "KO $value" >> log.txt
+    else
+        echo "OK $value" >> log.txt
+    fi
+done
+
+for line in {34..153}
+do
+    echo "5 números línea=$line"  >> log.txt
+    value=$(./push_swap $(awk -v num="$line" 'NR==num {gsub(/"/, ""); print}' bigtests.txt) | wc -l| xargs)
+    if [ "$value" -gt 1 ]; then
+        echo "KO $value" >> log.txt
+    else
+        echo "OK $value" >> log.txt
+    fi
+done
+
+awk 'prev ~ /números línea/ && /KO/ {print prev} {prev=$0}' log.txt
