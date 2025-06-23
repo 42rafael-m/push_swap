@@ -1,31 +1,52 @@
 #include "push_swap.h"
 
-int	ft_push_swap(t_list *stack_a, t_list *stack_b)
+int ft_find_pivot(t_list *stack_a)
 {
     t_list  *ordered_list;
-    t_list  *t;
     int i;
     int size;
-    int pivot;
-
+    
     i = 0;
     size = ft_lstsize(stack_a);
     ordered_list = ft_quickshort(stack_a);
-    while (ordered_list)
+    while (i < (size / 2))
     {
-        // printf("%p\n", ordered_list);
-        // printf("%d\n", *(int *)ordered_list -> content);
         ordered_list = ordered_list -> next;
-    }
-    t = stack_a;
-    while (i < size && stack_a -> next)
-    {
-        t = stack_a -> next;
         i++;
     }
-    pivot = *(int *)t -> content;
-    ft_lstsize(stack_b);
-    printf("pivot = %d\n", pivot);
+    return (*(int *)ordered_list -> content);
+}
+
+int	ft_push_swap(t_list **stack_a, t_list **stack_b)
+{   
+    int pivot;
+    t_list  *sa;
+    t_list  *sb;
+    int i;
+
+    sa = *stack_a;
+    sb = *stack_b;
+    pivot = ft_find_pivot(sa);
+    i = 0;
+    while (i < ft_lstsize(sa))
+    {
+        if (*(int *)sa -> content > pivot)
+        {
+            ft_push(&sa, &sb);
+            write (1, "pb\n", 3);
+            ft_rev_rot(&sb);
+            write (1, "rrb\n", 4);
+            // printf("sa = %d\n", *(int *)sa -> content);
+            // printf("sb = %d\n", *(int *)sb -> content);
+        }
+        else
+        {
+            ft_rotate(&sa);
+            write(1, "ra\n", 3);
+            // printf("sa = %d\n", *(int *)sa -> content);
+        }
+        i++;
+    }
     return (0);
 }
 
@@ -58,7 +79,7 @@ int ft_valid_args(int argc, char **argv)
     return (0);
 }
 
-t_list    *ft_stack(int argc, char **argv)
+t_list    *ft_stack_a(int argc, char **argv)
 {
     t_list	*stack;
 	t_list	*node;
@@ -87,19 +108,17 @@ int main(int argc, char **argv)
 {
     t_list    *stack_a;
     t_list    *stack_b;
-    int content;
-
+ 
     if (argc <= 1)
         return (write(2, "Error\n", 6), 1);
     if (ft_valid_args(argc, argv) == 1)
         return (write(2, "Error\n", 6), 1);
-    stack_a = ft_stack(argc, argv);
+    stack_a = ft_stack_a(argc, argv);
     if (!stack_a)
         return (write(2, "Error\n", 6), 3);
-    content = 0;
-    stack_b = ft_lstnew(&content);
+    stack_b = ft_load_stackn(argc / 2);
     if (!stack_b)
         return (write(2, "Error\n", 6), 1);
-    ft_push_swap(stack_a, stack_b);
+    ft_push_swap(&stack_a, &stack_b);
     return (0);
 }
