@@ -45,7 +45,9 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
         }
         i++;
     }
+    printf("stack_b = ");
     ft_lstiter(*stack_b, ft_print_content);
+    printf("\n");
     return (0);
 }
 
@@ -113,7 +115,7 @@ int main(int argc, char **argv)
 {
     t_list    *stack_a;
     t_list    *stack_b;
-    int *content;
+    char *content;
  
     if (argc <= 1)
         return (write(2, "Error\n", 6), 1);
@@ -122,13 +124,14 @@ int main(int argc, char **argv)
     stack_a = ft_stack_a(argc, argv);
     if (!stack_a)
         return (write(2, "Error\n", 6), 3);
-    content = (int *)ft_calloc(1, sizeof(int));
-    if (!content)
-        return (1);
     if (argc <= 5)
         return (ft_few_args(&stack_a), ft_lstclear(&stack_a, free), 0);
+    content = ft_strdup("Eliminar este nodo");
+    if (!content)
+        return (1);
     stack_b = ft_lstnew(content);
     ft_push_swap(&stack_a, &stack_b);
+    printf("stack_a = ");
     ft_lstiter(stack_a, ft_print_content);
     ft_lstclear(&stack_a, free);
     ft_lstclear(&stack_b, free);

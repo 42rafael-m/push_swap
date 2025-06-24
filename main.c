@@ -2,18 +2,10 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int main(int argc, char **argv)
+int main(void)
 {
-    int i = 0;
-
-    printf("%c", INV_CHARS[12]);
-    // if (argc)
-    // {
-    //     while (argv[i])
-    //     {
-    //         printf("%s\n", argv[i]);
-    //         i++;
-    //     }
-    //     printf("%p\n", argv[i]);
-    // }
+    int *a = (int *)ft_calloc(sizeof(int) + 1, sizeof(char));
+    *a = 2;
+    printf("%d\n", *a);
+    printf("%d\n", strcmp(a, "hola que tal"));
 }

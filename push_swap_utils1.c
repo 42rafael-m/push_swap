@@ -5,6 +5,7 @@ void	ft_few_args(t_list **stack)
 	ft_sort_four(stack);
 	ft_sort_three(stack);
 	ft_sort_two(stack);
+	ft_lstiter(*stack, ft_print_content);
 	return ;
 }
 
