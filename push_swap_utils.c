@@ -8,7 +8,7 @@ t_list	*ft_load_stackn(int size)
 	int	i;
 
 	i = 0;
-	content = '0';
+	content = 0;
 	stack_b = ft_lstnew(ft_copy_content(&content));
 	if (!stack_b)
 		return (NULL);

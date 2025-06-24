@@ -1,8 +1,9 @@
 #include "push_swap.h"
 
-void	ft_few_args(int argc, t_list **stack)
+void	ft_few_args(t_list **stack)
 {
-	ft_sort_three(stack, &argc);
+	ft_sort_four(stack);
+	ft_sort_three(stack);
 	ft_sort_two(stack);
 	return ;
 }

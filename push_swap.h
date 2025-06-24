@@ -21,14 +21,14 @@ t_list	*ft_quickshort(t_list *list);
 int	    ft_choose_pivot(t_list *list);
 t_list	*ft_load_stackn(int size);
 void    ft_sort_two(t_list **stack);
-void	ft_few_args(int argc, t_list **stack);
+void	ft_few_args(t_list **stack);
 t_list	*ft_quickshort(t_list *list);
 t_list	*ft_sort(t_list	*list, int pivot);
 int	    ft_choose_pivot(t_list *list);
 void	*ft_copy_content(void *content);
-void    ft_sort_three(t_list **stack, int *argc);
+void    ft_sort_three(t_list **stack);
 int	    ft_is_sorted(t_list *stack);
-void	ft_sort_four(t_list **stack, int *argc);
+void	ft_sort_four(t_list **stack);
 void    ft_print_content(void *s);
 
 #endif

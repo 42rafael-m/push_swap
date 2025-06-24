@@ -103,7 +103,7 @@ t_list    *ft_stack_a(int argc, char **argv)
 
 void    ft_print_content(void *s)
 {
-    printf("%d\n", *(int *)s);
+    printf("%d ", *(int *)s);
     return ; 
 }
 
@@ -122,17 +122,18 @@ int main(int argc, char **argv)
     stack_b = ft_load_stackn(argc / 2);
     if (!stack_b)
         return (write(2, "Error\n", 6), 1);
-    ft_few_args(argc, &stack_a);
+    if (argc <= 5)
+        ft_few_args(&stack_a);
     if (ft_is_sorted(stack_a))
     {
-        // ft_lstiter(stack_a, ft_print_content);
+        ft_lstiter(stack_a, ft_print_content);
         ft_lstclear(&stack_a, free);
         ft_lstclear(&stack_b, free);
         return (0);
     }
-    ft_push_swap(&stack_a, &stack_b);
+    // ft_push_swap(&stack_a, &stack_b);
     // ft_lstiter(stack_a, ft_print_content);
-    ft_lstclear(&stack_a, free);
-    ft_lstclear(&stack_b, free);
+    // ft_lstclear(&stack_a, free);
+    // ft_lstclear(&stack_b, free);
     return (0);
 }
