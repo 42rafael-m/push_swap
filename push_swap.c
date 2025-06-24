@@ -3,20 +3,21 @@
 int ft_find_pivot(t_list *stack_a)
 {
     t_list  *ordered_list;
+    t_list  *start;
     int i;
-    int size;
+    int pivot;
     
     i = 0;
-    size = ft_lstsize(stack_a);
     ordered_list = ft_quickshort(stack_a);
-    printf("ol = %p\n", ordered_list);
-    while (i < (size / 2))
+    start = ordered_list;
+    while (i < ft_lstsize(stack_a) / 2)
     {
-        printf("ol -> c = %d\n", *(int *)ordered_list -> content);
         ordered_list = ordered_list -> next;
         i++;
     }
-    return (*(int *)ordered_list -> content);
+    pivot = *(int *)ordered_list -> content;
+    ft_lstclear(&start, free);
+    return (pivot);
 }
 
 int	ft_push_swap(t_list **stack_a, t_list **stack_b)
@@ -26,15 +27,13 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
     int size;
 
     pivot = ft_find_pivot(*stack_a);
-    printf("pivot = %d\n", pivot);
     i = 0;
     size = ft_lstsize(*stack_a);
-    printf("size = %d\n", size);
     while (i < size)
     {
         if (*(int *)(*stack_a) -> content > pivot)
         {
-            ft_push(stack_a, stack_b);
+            ft_push(stack_b, stack_a);
             write (1, "pb\n", 3);
             ft_rev_rot(stack_b);
             write (1, "rrb\n", 4);
@@ -46,7 +45,7 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
         }
         i++;
     }
-    ft_lstiter(*stack_a, ft_print_content);
+    ft_lstiter(*stack_b, ft_print_content);
     return (0);
 }
 
@@ -114,6 +113,7 @@ int main(int argc, char **argv)
 {
     t_list    *stack_a;
     t_list    *stack_b;
+    int *content;
  
     if (argc <= 1)
         return (write(2, "Error\n", 6), 1);
@@ -122,16 +122,14 @@ int main(int argc, char **argv)
     stack_a = ft_stack_a(argc, argv);
     if (!stack_a)
         return (write(2, "Error\n", 6), 3);
-    stack_b = ft_load_stackn(argc / 2);
-    if (!stack_b)
-        return (write(2, "Error\n", 6), 1);
+    content = (int *)ft_calloc(1, sizeof(int));
+    if (!content)
+        return (1);
     if (argc <= 5)
-    {
-        ft_lstclear(&stack_b, free);
         return (ft_few_args(&stack_a), ft_lstclear(&stack_a, free), 0);
-    }
+    stack_b = ft_lstnew(content);
     ft_push_swap(&stack_a, &stack_b);
-    // ft_lstiter(stack_a, ft_print_content);
+    ft_lstiter(stack_a, ft_print_content);
     ft_lstclear(&stack_a, free);
     ft_lstclear(&stack_b, free);
     return (0);

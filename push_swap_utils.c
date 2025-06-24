@@ -1,27 +1,27 @@
 #include "push_swap.h"
 
-t_list	*ft_load_stackn(int size)
-{
-	t_list	*t;
-	t_list	*stack_b;
-	int	content;
-	int	i;
+// t_list	*ft_load_stackn(int size)
+// {
+// 	t_list	*t;
+// 	t_list	*stack_b;
+// 	int	content;
+// 	int	i;
 
-	i = 0;
-	content = 0;
-	stack_b = ft_lstnew(ft_copy_content(&content));
-	if (!stack_b)
-		return (NULL);
-	while (i < size)
-	{
-		t = ft_lstnew(ft_copy_content(&content));
-		if (!t)
-			return (NULL);
-		ft_lstadd_back(&stack_b, t);
-		i++;
-	}
-	return (stack_b);
-}
+// 	i = 0;
+// 	content = 0;
+// 	stack_b = ft_lstnew(ft_copy_content(&content));
+// 	if (!stack_b)
+// 		return (NULL);
+// 	while (i < size)
+// 	{
+// 		t = ft_lstnew(ft_copy_content(&content));
+// 		if (!t)
+// 			return (NULL);
+// 		ft_lstadd_back(&stack_b, t);
+// 		i++;
+// 	}
+// 	return (stack_b);
+// }
 
 void	ft_swap_s(t_list **stack)
 {
