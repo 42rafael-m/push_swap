@@ -36,14 +36,11 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
             write (1, "pb\n", 3);
             ft_rev_rot(&sb);
             write (1, "rrb\n", 4);
-            // printf("sa = %d\n", *(int *)sa -> content);
-            // printf("sb = %d\n", *(int *)sb -> content);
         }
         else
         {
             ft_rotate(&sa);
             write(1, "ra\n", 3);
-            // printf("sa = %d\n", *(int *)sa -> content);
         }
         i++;
     }
@@ -104,6 +101,12 @@ t_list    *ft_stack_a(int argc, char **argv)
 	return (stack);
 }
 
+void    ft_print_content(void *s)
+{
+    printf("%d\n", *(int *)s);
+    return ; 
+}
+
 int main(int argc, char **argv)
 {
     t_list    *stack_a;
@@ -119,7 +122,18 @@ int main(int argc, char **argv)
     stack_b = ft_load_stackn(argc / 2);
     if (!stack_b)
         return (write(2, "Error\n", 6), 1);
-    if (argc)
+    ft_few_args(argc, &stack_a);
+    if (ft_is_sorted(stack_a))
+    {
+        printf("Hola\n");
+        // ft_lstiter(stack_a, ft_print_content);
+        ft_lstclear(&stack_a, free);
+        ft_lstclear(&stack_b, free);
+        return (0);
+    }
     ft_push_swap(&stack_a, &stack_b);
+    ft_lstiter(stack_a, ft_print_content);
+    ft_lstclear(&stack_a, free);
+    ft_lstclear(&stack_b, free);
     return (0);
 }

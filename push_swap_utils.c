@@ -8,8 +8,8 @@ t_list	*ft_load_stackn(int size)
 	int	i;
 
 	i = 0;
-	content = 0;
-	stack_b = ft_lstnew(&content);
+	content = '0';
+	stack_b = ft_lstnew(ft_copy_content(&content));
 	if (!stack_b)
 		return (NULL);
 	while (i < size)
@@ -57,12 +57,12 @@ void	ft_rev_rot(t_list **stack)
 	if (!*stack || !(*stack) -> next)
 		return ;
 	node = *stack;
-	while (node && (node -> next) -> next)
+	while (node && node -> next && (node -> next) -> next)
 		node = node -> next;
 	last = node -> next;
 	node -> next = NULL;
+	last -> next = *stack;
 	*stack = last;
-	
 	return ;
 }
 

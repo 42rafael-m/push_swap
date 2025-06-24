@@ -1,12 +1,16 @@
 2 números línea=1
-KO 2
+OK 0
 2 números línea=2
-KO 6
+OK 1
 3 números línea=4
-KO 7
+OK 0
 3 números línea=5
-KO 8
+KO 13
 3 números línea=6
-KO 5
+OK 1
 3 números línea=7
-KO 8
+KO 4
+3 números línea=8
+OK 2
+3 números línea=9
+KO 5

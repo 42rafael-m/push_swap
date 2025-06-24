@@ -1,12 +1,17 @@
 #include "push_swap.h"
 
-
+void	ft_few_args(int argc, t_list **stack)
+{
+	ft_sort_three(stack, &argc);
+	ft_sort_two(stack);
+	return ;
+}
 
 void	*ft_copy_content(void *content)
 {
 	int	*copy;
 
-	copy = malloc(sizeof(int));
+	copy = (int *)ft_calloc(1, sizeof(int));
 	if (!copy)
 		return (NULL);
 	*copy = *(int *)content;
