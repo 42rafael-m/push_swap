@@ -79,9 +79,7 @@ t_list	*ft_quickshort(t_list *list)
 	t_list	*t;
 	t_list	*new_list;
 	
-	if (!list)
-		return (NULL);
-	if (!list -> next)
+	if (!list || !list -> next)
 		return (list);
 	if (!(list -> next) -> next && *(int *)list -> content < *(int *)(list -> next) -> content)
 		return (list);
@@ -89,6 +87,7 @@ t_list	*ft_quickshort(t_list *list)
 	{
 		t = list;
 		list = list -> next;
+		t -> next = NULL;
 		list -> next = t;
 		return (list);
 	}

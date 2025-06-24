@@ -50,13 +50,37 @@ void    ft_sort_three(t_list **stack)
     return ;
 }
 
-void	ft_sort_four(t_list **stack)
+void	ft_four(t_list **stack)
 {
-	t_list	*t;
 	int a;
 	int b;
 	int	c;
 	int	d;
+
+	a = *(int *)(*stack) -> content;
+	b = *(int *)(*stack) -> next -> content;
+	c = *(int *)(*stack) -> next -> next -> content;
+	d = *(int *)(*stack) -> next -> next -> next -> content;
+	if (c > d)
+	{
+		if (d < a)
+			return (write(1, "rra\n", 4), ft_rev_rot(stack));
+		if (d < b)
+		{
+			write(1, "rra\n", 4);
+			write(1, "sa\n", 3);
+			return (ft_rev_rot(stack), ft_swap_s(stack));
+		}
+		write(1, "rra\n", 4);
+		write(1, "sa\n", 3);
+		return (ft_rev_rot(stack), ft_swap_s(stack));
+	}
+}
+
+void	ft_sort_four(t_list **stack)
+{
+	t_list	*t;
+
 
 	if (ft_lstsize(*stack) < 4)
 		return ;
@@ -66,32 +90,8 @@ void	ft_sort_four(t_list **stack)
 	(*stack) -> next -> next -> next = t;
 	if (ft_is_sorted(*stack))
 		return ;
-	a = *(int *)(*stack) -> content;
-	b = *(int *)(*stack) -> next -> content;
-	c = *(int *)(*stack) -> next -> next -> content;
-	d = *(int *)(*stack) -> next -> next -> next -> content;
-	if (c > d)
-	{
-		if (d < a)
-		{
-			ft_rev_rot(stack);
-			write(1, "rra\n", 4);
-			return ;
-		}
-		if (d < b)
-		{
-			ft_rev_rot(stack);
-			write(1, "rra\n", 4);
-			ft_swap_s(stack);
-			write(1, "sa\n", 3);
-			return ;
-		}
-		ft_rev_rot(stack);
-		write(1, "rra\n", 4);
-		ft_swap_s(stack);
-		write(1, "sa\n", 3);
-		return ;
-	}
+	ft_four(stack);
+	return ;
 }
 
 int	ft_is_sorted(t_list *stack)

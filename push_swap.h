@@ -30,5 +30,6 @@ void    ft_sort_three(t_list **stack);
 int	    ft_is_sorted(t_list *stack);
 void	ft_sort_four(t_list **stack);
 void    ft_print_content(void *s);
+void	ft_four(t_list **stack);
 
 #endif
