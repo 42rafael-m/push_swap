@@ -125,13 +125,13 @@ int main(int argc, char **argv)
     ft_few_args(argc, &stack_a);
     if (ft_is_sorted(stack_a))
     {
-        // ft_lstiter(stack_a, ft_print_content);
+        ft_lstiter(stack_a, ft_print_content);
         ft_lstclear(&stack_a, free);
         ft_lstclear(&stack_b, free);
         return (0);
     }
     ft_push_swap(&stack_a, &stack_b);
-    // ft_lstiter(stack_a, ft_print_content);
+    ft_lstiter(stack_a, ft_print_content);
     ft_lstclear(&stack_a, free);
     ft_lstclear(&stack_b, free);
     return (0);

@@ -23,16 +23,22 @@ void    ft_sort_three(t_list **stack, int *argc)
 {
 	int b;
 	int c;
+	int	a;
 
 	if (!(*stack) || !(*stack) -> next || !(*stack) -> next -> next)
 		return ;
-	if ((*stack) -> next)
-		b = *(int *)(*stack) -> next -> content;
-	if ((*stack) -> next -> next)
-    	c = *(int *)(*stack) -> next -> next -> content;
+	a = *(int *)(*stack) -> content;
+	b = *(int *)(*stack) -> next -> content;
+    c = *(int *)(*stack) -> next -> next -> content;
     ft_sort_two(stack);
 	if (b > c)
 	{
+		if (c < a)
+		{
+			ft_rev_rot(stack);
+			write(1, "rra\n", 4);
+			return ;
+		}
 		ft_rotate(stack);
 		write(1, "ra\n", 3);
 		ft_swap_s(stack);
