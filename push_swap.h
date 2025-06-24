@@ -29,5 +29,6 @@ void	*ft_copy_content(void *content);
 void    ft_sort_three(t_list **stack, int *argc);
 int	    ft_is_sorted(t_list *stack);
 void	ft_sort_four(t_list **stack, int *argc);
+void    ft_print_content(void *s);
 
 #endif

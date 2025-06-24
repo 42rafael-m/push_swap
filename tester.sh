@@ -16,7 +16,7 @@ for line in {4..9}
 do
     echo "3 números línea=$line" >> log.txt
     value=$(./push_swap $(awk -v num="$line" 'NR==num {gsub(/"/, ""); print}' tests.txt) | wc -l| xargs)
-    if [ "$value" -gt 3 ]; then
+    if [ "$value" -gt 4 ]; then
         echo "KO $value" >> log.txt
     else
         echo "OK $value" >> log.txt

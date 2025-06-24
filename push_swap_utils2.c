@@ -27,10 +27,10 @@ void    ft_sort_three(t_list **stack, int *argc)
 
 	if (!(*stack) || !(*stack) -> next || !(*stack) -> next -> next)
 		return ;
+    ft_sort_two(stack);
 	a = *(int *)(*stack) -> content;
 	b = *(int *)(*stack) -> next -> content;
     c = *(int *)(*stack) -> next -> next -> content;
-    ft_sort_two(stack);
 	if (b > c)
 	{
 		if (c < a)
