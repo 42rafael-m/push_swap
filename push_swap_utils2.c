@@ -79,7 +79,7 @@ int	ft_is_sorted(t_list *stack)
 		return (0);
 	while (stack && stack -> next)
 	{
-		if (stack -> content > stack -> next -> content)
+		if (*(int *)stack -> content > *(int *)stack -> next -> content)
 			return (0);
 		stack = stack -> next;
 	}
