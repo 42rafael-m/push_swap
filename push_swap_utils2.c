@@ -1,5 +1,15 @@
 #include "push_swap.h"
 
+void	ft_few_args(t_list **stack)
+{
+	if (ft_lstsize(*stack) == 4)
+		ft_sort_four(stack);
+	ft_sort_three(stack);
+	ft_sort_two(stack);
+	ft_lstiter(*stack, ft_print_content);
+	return ;
+}
+
 void    ft_sort_two(t_list **stack)
 {
     int	a;
@@ -41,25 +51,31 @@ void    ft_sort_three(t_list **stack)
     return ;
 }
 
-void	ft_four(t_list **stack)
-{
-	while ((*stack) -> content != ft_find_min(*stack))
-		ft_rotate_a(stack);
-		
-}
-
 void	ft_sort_four(t_list **stack)
 {
-	// t_list	*t;
+	int	min;
 
-	if (ft_lstsize(*stack) < 4)
-		return (ft_sort_three(stack));
-	// t = (*stack) -> next -> next -> next;
-	// (*stack) -> next -> next -> next = NULL;
-	// (*stack) -> next -> next -> next = t;
+	min = ft_find_min(*stack);
+	if (*(int *)(*stack) -> next -> next -> next -> content == min)
+		ft_rev_rot_a(stack);
+	else
+		while (*(int *)(*stack) -> content != min)
+			ft_rotate_a(stack);
 	if (ft_is_sorted(*stack))
 		return ;
-	ft_four(stack);
+	min = ft_find_min((*stack) -> next);
+	while (*(int *)(*stack) -> next -> content != min)
+	{
+		ft_rev_rot_a(stack);
+		ft_swap_a(stack);
+	}
+	if (ft_is_sorted(*stack))
+		return ;
+	ft_rotate_a(stack);
+	ft_rotate_a(stack);
+	ft_swap_a(stack);
+	ft_rotate_a(stack);
+	ft_rotate_a(stack);
 	return ;
 }
 

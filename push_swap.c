@@ -158,15 +158,14 @@ int main(int argc, char **argv)
     if (!stack_a)
         return (write(2, "Error\n", 6), 3);
 		if (ft_is_sorted(stack_a))
-		return (0);
+		return (ft_lstiter(stack_a, ft_print_content), 0);
 	if (argc <= 5)
-		return (ft_sort_four(&stack_a), ft_lstiter(stack_a, ft_print_content), 0);
+		return (ft_few_args(&stack_a), 0);
     content = ft_strdup("Eliminar este nodo");
     if (!content)
         return (1);
     stack_b = ft_lstnew(content);
     ft_push_swap(&stack_a, &stack_b);
-    printf("stack_a = ");
     ft_lstiter(stack_a, ft_print_content);
     ft_lstclear(&stack_a, free);
     ft_lstclear(&stack_b, free);
