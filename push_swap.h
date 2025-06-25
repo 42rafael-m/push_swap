@@ -35,5 +35,6 @@ int	    ft_find_pos_e(t_list **stack);
 int     ft_choose_operation(t_list *stack);
 void    ft_sort_stack(t_list **stack);
 t_list  *ft_stack_a(int argc, char **argv);
+void	ft_rev_sort(t_list **list, int op);
 
 #endif
