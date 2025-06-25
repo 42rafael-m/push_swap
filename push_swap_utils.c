@@ -46,7 +46,7 @@ void	ft_swap_s(t_list **stack_a, t_list **stack_b)
 	return ;
 }
 
-void	ft_push_a(t_list **stack_a, t_list **stack_b)
+void	ft_push_b(t_list **stack_b, t_list **stack_a)
 {
 	t_list	*t;
 
@@ -60,7 +60,7 @@ void	ft_push_a(t_list **stack_a, t_list **stack_b)
 	return ; 
 }
 
-void	ft_push_b(t_list **stack_b, t_list **stack_a)
+void	ft_push_a(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*t;
 

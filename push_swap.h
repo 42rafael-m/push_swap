@@ -45,5 +45,7 @@ void	ft_rev_rot_a(t_list **stack);
 void	ft_push_b(t_list **stack_b, t_list **stack_a);
 void	ft_swap_b(t_list **stack);
 void	ft_swap_a(t_list **stack);
+int     ft_find_max(t_list  *list);
+int     ft_find_min(t_list  *list);
 
 #endif
