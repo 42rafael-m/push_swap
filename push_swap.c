@@ -36,8 +36,10 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
     int  end_b;
 	int	max;
 	int	min;
+	int	i;
 
 	t = *stack_b;
+	i = 0;
 	max = ft_find_max(*stack_a);
 	min = ft_find_min(*stack_a);
     while (*stack_a)
@@ -45,27 +47,34 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
         head_a = *(int *)(*stack_a) -> content;
         head_b = *(int *)(*stack_b) -> content;
         end_b = *(int *)(ft_lstlast(*stack_b)) -> content;
+		printf("ha = %d\n", head_a);
+		printf("hb = %d\n", head_b);
+		printf("eb = %d\n", end_b);
 		if (*stack_b == t)
 		{
 			ft_push_a(stack_a, stack_b);
 			ft_lstdelone(t, free);
 			(*stack_b) -> next = NULL;
+			t = NULL;
 		}
-		else if ((head_a < head_b && head_a > end_b) || head_a == min)
+		else if (head_a == min || (head_a < head_b && head_a > end_b))
             ft_push_a(stack_a, stack_b);
-        else if (head_a == max)
+        else if (head_a == max || head_a > ft_find_max(*stack_b))
 		{
-			while (*stack_b)
+			printf("Hola\n");
+			while (*(int *)(*stack_b) -> content < ft_find_max(*stack_b))
 				ft_rotate_b(stack_b);
 			ft_push_a(stack_a, stack_b);
+			ft_swap_b(stack_b);
 		}
-        else
-		{
+        else 
 			ft_rotate_b(stack_b);
-			continue ;
-		}
-        ft_rotate_a(stack_a);
+        i++;
     }
+	ft_lstiter(*stack_b, ft_print_content);
+	printf("\n");
+	while (!ft_is_sorted(*stack_b))
+		ft_rev_rot_b(stack_b);
 	while (*stack_b)
 		ft_push_b(stack_b, stack_a);
 	return (0);
@@ -132,6 +141,19 @@ int	ft_is_sorted(t_list *stack)
 	while (stack && stack -> next)
 	{
 		if (*(int *)stack -> content > *(int *)stack -> next -> content)
+			return (0);
+		stack = stack -> next;
+	}
+	return (1);
+}
+
+int	ft_is_rev_sorted(t_list *stack)
+{
+	if (!stack)
+		return (0);
+	while (stack && stack -> next)
+	{
+		if (*(int *)stack -> content < *(int *)stack -> next -> content)
 			return (0);
 		stack = stack -> next;
 	}

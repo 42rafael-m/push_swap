@@ -79,3 +79,4 @@ void	ft_sort_four(t_list **stack)
 	return ;
 }
 
+

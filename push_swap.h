@@ -47,5 +47,6 @@ void	ft_swap_b(t_list **stack);
 void	ft_swap_a(t_list **stack);
 int     ft_find_max(t_list  *list);
 int     ft_find_min(t_list  *list);
+int	    ft_is_rev_sorted(t_list *stack);
 
 #endif
