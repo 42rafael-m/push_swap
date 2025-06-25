@@ -46,37 +46,59 @@ int	ft_choose_operation(t_list *stack)
 		pos_h++;
     }
 	pos_e = ft_find_pos_e(&head);
+	printf("pos_e = %d\n", pos_e);
+	printf("pos_h = %d\n", pos_h);
 	if (pos_e < pos_h)
 		return (-pos_e);
 	return (pos_h);
 }
 
-void	ft_rev_sort(t_list **stack, int op)
+void	ft_rev_sort_a(t_list **stack, int op)
 {
 	if (!stack || !*stack)
 		return ;
-	while (op >= )
+	while (op > 0)
 	{
-		ft_rotate(stack);
-		write(1, "ra\n", 3);
+		ft_rotate_a(stack);
 		op--;
-		ft_swap_s();
 	}
+	ft_swap_a(stack);
+	return ;
 }
 
-void    ft_sort_stack(t_list **stack)
+void    ft_sort_stack_a(t_list **stack)
 {
 	int	op;
 
     if (!stack || !*stack)
         return ;
-	while (stack)
+	if (ft_is_sorted(*stack))
+		return ;
+	op = ft_choose_operation(*stack);
+	printf ("op = %d\n", op);
+	if (op < 0)
 	{
-		op = ft_choose_operation(*stack);
-		if (op < 0)
+		while (op < 0)
 		{
-			op = -op;
-		
+			ft_rev_rot_a(stack);
+			ft_swap_a(stack);
+			op++;
 		}
 	}
+	if (op > 0)
+	{
+		while (op > 1)
+		{
+			ft_swap_a(stack);
+			ft_rotate_a(stack);
+			op--;
+		}
+		ft_swap_a(stack);
+	}
+	ft_lstiter(*stack, ft_print_content);
+	printf("\n");
+	if (ft_is_sorted(*stack))
+		return ;
+	ft_rotate_a(stack);
+	ft_sort_stack_a(stack);
 }

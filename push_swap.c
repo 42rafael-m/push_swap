@@ -33,16 +33,11 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
     {
         if (*(int *)(*stack_a) -> content > pivot)
         {
-            ft_push(stack_b, stack_a);
-            write (1, "pb\n", 3);
-            ft_rev_rot(stack_b);
-            write (1, "rrb\n", 4);
+            ft_push_b(stack_b, stack_a);
+            ft_rev_rot_b(stack_b);
         }
         else
-        {
-            ft_rotate(stack_a);
-            write(1, "ra\n", 3);
-        }
+            ft_rotate_a(stack_a);
         i++;
     }
     printf("stack_b = ");

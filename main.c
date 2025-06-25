@@ -7,8 +7,8 @@ int main(int argc, char **argv)
 	t_list	*stack = ft_stack_a(argc, argv);
 
 	// ft_lstiter(stack, ft_print_content);
-	int op = ft_choose_operation(stack);
-	printf ("op = %d\n", op);
+    ft_sort_stack_a(&stack);
+    // ft_lstiter(stack, ft_print_content);
 	ft_lstclear(&stack, free);
 }
 

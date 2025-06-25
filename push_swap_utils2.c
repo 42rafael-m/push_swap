@@ -12,11 +12,7 @@ void    ft_sort_two(t_list **stack)
     if (a < b)
 		return ;
 	if (a > b)
-    {
-	    ft_swap_s(stack);
-	    write(1, "sa\n", 3);
-	    return ;
-    }
+	    return (ft_swap_a(stack));
 	return ;
 }
 
@@ -35,17 +31,10 @@ void    ft_sort_three(t_list **stack)
 	if (b > c)
 	{
 		if (c < a)
-		{
-			ft_rev_rot(stack);
-			write(1, "rra\n", 4);
-			return ;
-		}
-		ft_rotate(stack);
-		write(1, "ra\n", 3);
-		ft_swap_s(stack);
-		write(1, "sa\n", 3);
-		ft_rev_rot(stack);
-		write(1, "rra\n", 4);
+			return (ft_rev_rot_a(stack));
+		ft_rotate_a(stack);
+		ft_swap_a(stack);
+		ft_rev_rot_a(stack);
 	}
     return ;
 }
@@ -64,16 +53,10 @@ void	ft_four(t_list **stack)
 	if (c > d)
 	{
 		if (d < a)
-			return (write(1, "rra\n", 4), ft_rev_rot(stack));
+			return (ft_rev_rot_a(stack));
 		if (d < b)
-		{
-			write(1, "rra\n", 4);
-			write(1, "sa\n", 3);
-			return (ft_rev_rot(stack), ft_swap_s(stack));
-		}
-		write(1, "rra\n", 4);
-		write(1, "sa\n", 3);
-		return (ft_rev_rot(stack), ft_swap_s(stack));
+			return (ft_rev_rot_a(stack), ft_swap_a(stack));
+		return (ft_rev_rot_a(stack), ft_swap_a(stack));
 	}
 }
 
