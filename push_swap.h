@@ -31,5 +31,9 @@ int	    ft_is_sorted(t_list *stack);
 void	ft_sort_four(t_list **stack);
 void    ft_print_content(void *s);
 void	ft_four(t_list **stack);
+int	    ft_find_pos_e(t_list **stack);
+int     ft_choose_operation(t_list *stack);
+void    ft_sort_stack(t_list **stack);
+t_list  *ft_stack_a(int argc, char **argv);
 
 #endif
