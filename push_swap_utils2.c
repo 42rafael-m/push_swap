@@ -49,3 +49,25 @@ t_list  *ft_find_b_target(t_list *head, t_list *stack)
 	}
 	return (r);
 }
+
+int	ft_choose_operation(t_list *stack, t_list *node)
+{
+	int	size;
+	int	pos;
+
+    if (!stack)
+        return (INT_MIN);
+	size = ft_lstsize(stack);
+	pos = 0;
+	while (stack)
+	{
+		if (*(int *)stack -> content == *(int *)node -> content)
+			break;
+		pos++;
+		stack = stack -> next;
+	}
+	if (pos <= (size / 2))
+		return (pos);
+	pos = size - pos;
+	return (-pos);
+}
