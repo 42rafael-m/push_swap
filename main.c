@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     // ft_lstiter(stack, ft_print_content);
 	t_list	*stackb = ft_stack_a(argc, argv);
     t_list *min = ft_find_min(stack);
-	t_list	*ft = ft_find_b_target(stack, stackb);
+	t_list	*ft = ft_find_a_target(stack, stackb);
 	
     printf("ft = %p\n", ft);
 	printf("sb = %p\n", stackb);
