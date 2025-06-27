@@ -1,92 +1,48 @@
 #include "push_swap.h"
 
-t_list	*ft_find_max(t_list **list)
+t_list	*ft_find_max(t_list *list)
 {
     t_list  *r;
     int max;
 
-    max = INT_MAX;
+    max = INT_MIN;
     while (list)
     {
-        if (*(int *)(*list) -> content > max)
+        if (*(int *)list -> content > max)
         {
-            r = *list;
-            max = (*list) -> content;
+            r = list;
+            max = *(int *)list -> content;
         }
-        list = (*list) -> next;
+        list = list -> next;
     }
-    return (*list);
+    return (r);
 }
 
-t_list	*ft_find_min(t_list **list)
+t_list	*ft_find_min(t_list *list)
 {
     t_list  *r;
     int min;
 
-    min = INT_MIN;
+    min = INT_MAX;
     while (list)
     {
-        if (*(int *)(*list) -> content < min)
+        if (*(int *)list -> content < min)
         {
-            r = *list;
-            min = (*list) -> content;
+            r = list;
+            min = *(int *)list -> content;
+			printf("min = %d\n", min);
+			printf("r = %p\n", r);
         }
-        list = (*list) -> next;
+        list = list -> next;
     }
-    return (*list);
+    return (r);
 }
 
-int	ft_push_swap(t_list **stack_a, t_list **stack_b)
-{   
-    int  head_a;
-    int  head_b;
-	t_list	*t;
-    int  end_b;
-	int	max;
-	int	min;
-	int	i;
+// int	ft_push_swap(t_list **stack_a, t_list **stack_b)
+// {   
 
-	t = *stack_b;
-	i = 0;
-	max = ft_find_max(*stack_a);
-	min = ft_find_min(*stack_a);
-    while (*stack_a)
-    {
-        head_a = *(int *)(*stack_a) -> content;
-        head_b = *(int *)(*stack_b) -> content;
-        end_b = *(int *)(ft_lstlast(*stack_b)) -> content;
-		printf("ha = %d\n", head_a);
-		printf("hb = %d\n", head_b);
-		printf("eb = %d\n", end_b);
-		if (*stack_b == t)
-		{
-			ft_push_a(stack_a, stack_b);
-			ft_lstdelone(t, free);
-			(*stack_b) -> next = NULL;
-			t = NULL;
-		}
-		else if (head_a == min || (head_a < head_b && head_a > end_b))
-            ft_push_a(stack_a, stack_b);
-        else if (head_a == max || head_a > ft_find_max(*stack_b))
-		{
-			printf("Hola\n");
-			while (*(int *)(*stack_b) -> content < ft_find_max(*stack_b))
-				ft_rotate_b(stack_b);
-			ft_push_a(stack_a, stack_b);
-			ft_swap_b(stack_b);
-		}
-        else 
-			ft_rotate_b(stack_b);
-        i++;
-    }
-	ft_lstiter(*stack_b, ft_print_content);
-	printf("\n");
-	while (!ft_is_sorted(*stack_b))
-		ft_rev_rot_b(stack_b);
-	while (*stack_b)
-		ft_push_b(stack_b, stack_a);
-	return (0);
-}
+// 	return (0);
+// }
 
 int ft_valid_args(int argc, char **argv)
 {
@@ -174,30 +130,30 @@ void    ft_print_content(void *s)
     return ; 
 }
 
-int main(int argc, char **argv)
-{
-    t_list    *stack_a;
-    t_list    *stack_b;
-    char *content;
+// int main(int argc, char **argv)
+// {
+//     t_list    *stack_a;
+//     t_list    *stack_b;
+//     char *content;
  
-    if (argc <= 1)
-        return (write(2, "Error\n", 6), 1);
-    if (ft_valid_args(argc, argv) == 1)
-        return (write(2, "Error\n", 6), 1);
-    stack_a = ft_stack_a(argc, argv);
-    if (!stack_a)
-        return (write(2, "Error\n", 6), 3);
-		if (ft_is_sorted(stack_a))
-		return (ft_lstiter(stack_a, ft_print_content), 0);
-	if (argc <= 5)
-		return (ft_few_args(&stack_a), 0);
-    content = ft_strdup("Eliminar este nodo");
-    if (!content)
-        return (1);
-    stack_b = ft_lstnew(content);
-    ft_push_swap(&stack_a, &stack_b);
-    ft_lstiter(stack_a, ft_print_content);
-    ft_lstclear(&stack_a, free);
-    ft_lstclear(&stack_b, free);
-    return (0);
-}
+//     if (argc <= 1)
+//         return (write(2, "Error\n", 6), 1);
+//     if (ft_valid_args(argc, argv) == 1)
+//         return (write(2, "Error\n", 6), 1);
+//     stack_a = ft_stack_a(argc, argv);
+//     if (!stack_a)
+//         return (write(2, "Error\n", 6), 3);
+// 		if (ft_is_sorted(stack_a))
+// 		return (ft_lstiter(stack_a, ft_print_content), 0);
+// 	if (argc <= 5)
+// 		return (ft_few_args(&stack_a), 0);
+//     content = ft_strdup("Eliminar este nodo");
+//     if (!content)
+//         return (1);
+//     stack_b = ft_lstnew(content);
+//     ft_push_swap(&stack_a, &stack_b);
+//     ft_lstiter(stack_a, ft_print_content);
+//     ft_lstclear(&stack_a, free);
+//     ft_lstclear(&stack_b, free);
+//     return (0);
+// }

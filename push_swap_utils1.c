@@ -65,7 +65,7 @@ void	ft_sort_four(t_list **stack)
 {
 	int	min;
 
-	min = ft_find_min(*stack);
+	min = *(int *)ft_find_min(*stack) -> content;
 	if (*(int *)(*stack) -> next -> next -> next -> content == min)
 		ft_rev_rot_a(stack);
 	else
@@ -73,7 +73,7 @@ void	ft_sort_four(t_list **stack)
 			ft_rotate_a(stack);
 	if (ft_is_sorted(*stack))
 		return ;
-	min = ft_find_min((*stack) -> next);
+	min = *(int *)ft_find_min((*stack) -> next) -> content;
 	while (*(int *)(*stack) -> next -> content != min)
 	{
 		ft_rev_rot_a(stack);

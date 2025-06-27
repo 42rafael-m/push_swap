@@ -31,8 +31,8 @@ void    ft_swap_s(t_list **stack_a, t_list **stack_b);
 void    ft_push_a(t_list **stack_a, t_list **stack_b);
 void    ft_rev_rot_r(t_list **stack, t_list **stack_b);
 void    ft_rotate_a(t_list **stack);
-t_list	*ft_find_max(t_list  **list);
-t_list	*ft_find_min(t_list  **list);
+t_list	*ft_find_max(t_list *list);
+t_list	*ft_find_min(t_list *list);
 int	    ft_is_rev_sorted(t_list *stack);
 
 #endif
