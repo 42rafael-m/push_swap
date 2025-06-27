@@ -1,89 +1,82 @@
 #include "push_swap.h"
 
-void	*ft_copy_content(void *content)
+void	ft_few_args(t_list **stack)
 {
-	int	*copy;
-
-	copy = (int *)ft_calloc(1, sizeof(int));
-	if (!copy)
-		return (NULL);
-	*copy = *(int *)content;
-	return ((void *)copy);
+	if (ft_lstsize(*stack) == 4)
+		ft_sort_four(stack);
+	ft_sort_three(stack);
+	ft_sort_two(stack);
+	ft_lstiter(*stack, ft_print_content);
+	return ;
 }
 
-int	ft_choose_pivot(t_list *list)
+void    ft_sort_two(t_list **stack)
 {
-	int	i;
+    int	a;
+	int b;
+
+	if (!(*stack) || !(*stack) -> next)
+		return ;
+	a = *(int *)(*stack) -> content;
+	b = *(int *)(*stack) -> next -> content;
+    if (a < b)
+		return ;
+	if (a > b)
+	    return (ft_swap_a(stack));
+	return ;
+}
+
+void    ft_sort_three(t_list **stack)
+{
+	int b;
+	int c;
 	int	a;
-	int	b;
-	int	c;
 
-	i = 0;
-	a = *(int *)list -> content;
-	c = ft_lstsize(list) / 2;
-	while (i < c && list -> next)
+	if (!(*stack) || !(*stack) -> next)
+		return ;
+    ft_sort_two(stack);
+	if ( !(*stack) -> next -> next)
+		return ;
+	a = *(int *)(*stack) -> content;
+	b = *(int *)(*stack) -> next -> content;
+    c = *(int *)(*stack) -> next -> next -> content;
+	if (b > c)
 	{
-		list = list -> next;
-		i++;
+		if (c < a)
+			return (ft_rev_rot_a(stack));
+		ft_rotate_a(stack);
+		ft_swap_a(stack);
+		ft_rev_rot_a(stack);
 	}
-	b = *(int *)list -> content;
-	list = ft_lstlast(list);
-	c = *(int *)list -> content;
-	if ((a > b && a < c) || (a > c && a < b))
-		return (a);
-	if ((b > a && b < c) || (b > c && b < a))
-		return (b);
-	return (c);
+    return ;
 }
 
-t_list	*ft_sort(t_list	*list, int pivot)
+void	ft_sort_four(t_list **stack)
 {
-	t_list	*low_list;
-	t_list	*big_list;
-	t_list	*new_list;
-	t_list	*pivot_node;
+	int	min;
 
-	low_list = NULL;
-	big_list = NULL;
-	pivot_node = NULL;
-	while (list)
+	min = ft_find_min(*stack);
+	if (*(int *)(*stack) -> next -> next -> next -> content == min)
+		ft_rev_rot_a(stack);
+	else
+		while (*(int *)(*stack) -> content != min)
+			ft_rotate_a(stack);
+	if (ft_is_sorted(*stack))
+		return ;
+	min = ft_find_min((*stack) -> next);
+	while (*(int *)(*stack) -> next -> content != min)
 	{
-		new_list = ft_lstnew(ft_copy_content(list -> content));
-		if (!new_list)
-			return (NULL);
-		if (*(int *)new_list -> content < pivot)
-			ft_lstadd_back(&low_list, new_list);
-		else if (*(int *)new_list -> content == pivot)
-			ft_lstadd_back(&pivot_node, new_list);
-		else
-			ft_lstadd_back(&big_list, new_list);
-		list = list -> next;
+		ft_rev_rot_a(stack);
+		ft_swap_a(stack);
 	}
-	new_list = ft_quickshort(low_list);
-	ft_lstadd_back(&new_list, pivot_node);
-	ft_lstadd_back(&new_list, ft_quickshort(big_list));
-	return (new_list);
+	if (ft_is_sorted(*stack))
+		return ;
+	ft_rotate_a(stack);
+	ft_rotate_a(stack);
+	ft_swap_a(stack);
+	ft_rotate_a(stack);
+	ft_rotate_a(stack);
+	return ;
 }
 
-t_list	*ft_quickshort(t_list *list)
-{
-	int pivot;
-	t_list	*t;
-	t_list	*new_list;
-	
-	if (!list || !list -> next)
-		return (list);
-	if (!(list -> next) -> next && *(int *)list -> content < *(int *)(list -> next) -> content)
-		return (list);
-	if (!(list -> next) -> next && *(int *)list -> content > *(int *)(list -> next) -> content)
-	{
-		t = list;
-		list = list -> next;
-		t -> next = NULL;
-		list -> next = t;
-		return (list);
-	}
-	pivot = ft_choose_pivot(list);
-	new_list = ft_sort(list, pivot);
-	return (new_list);
-}
+
