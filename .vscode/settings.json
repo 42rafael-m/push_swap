@@ -3,6 +3,8 @@
         "push_swap.h": "c",
         "random": "c",
         "limits": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "stddef.h": "c",
+        "types.h": "c"
     }
 }

@@ -34,5 +34,6 @@ void    ft_rotate_a(t_list **stack);
 t_list	*ft_find_max(t_list *list);
 t_list	*ft_find_min(t_list *list);
 int	    ft_is_rev_sorted(t_list *stack);
+t_list  *ft_find_b_target(t_list *head, t_list *stack);
 
 #endif

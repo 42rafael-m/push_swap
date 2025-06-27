@@ -30,8 +30,6 @@ t_list	*ft_find_min(t_list *list)
         {
             r = list;
             min = *(int *)list -> content;
-			printf("min = %d\n", min);
-			printf("r = %p\n", r);
         }
         list = list -> next;
     }
