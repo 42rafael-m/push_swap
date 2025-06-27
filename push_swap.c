@@ -1,31 +1,39 @@
 #include "push_swap.h"
 
-int ft_find_max(t_list  *list)
+t_list	*ft_find_max(t_list **list)
 {
+    t_list  *r;
     int max;
 
-    max = INT_MIN;
+    max = INT_MAX;
     while (list)
     {
-        if (*(int *)list -> content > max)
-            max = *(int *)list -> content;
-        list = list -> next;
+        if (*(int *)(*list) -> content > max)
+        {
+            r = *list;
+            max = (*list) -> content;
+        }
+        list = (*list) -> next;
     }
-    return (max);
+    return (*list);
 }
 
-int ft_find_min(t_list  *list)
+t_list	*ft_find_min(t_list **list)
 {
+    t_list  *r;
     int min;
 
-    min = INT_MAX;
+    min = INT_MIN;
     while (list)
     {
-        if (*(int *)list -> content < min)
-            min = *(int *)list -> content;
-        list = list -> next;
+        if (*(int *)(*list) -> content < min)
+        {
+            r = *list;
+            min = (*list) -> content;
+        }
+        list = (*list) -> next;
     }
-    return (min);
+    return (*list);
 }
 
 int	ft_push_swap(t_list **stack_a, t_list **stack_b)

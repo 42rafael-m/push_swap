@@ -1,11 +1,21 @@
 #include "push_swap.h"
 
+void    *ft_copy_content(void *content)
+{
+    int     *copy;
+
+    copy = (int *)ft_calloc(1, sizeof(int));
+    if (!copy)
+        return (NULL);
+    *copy = *(int *)content;
+    	return ((void *)copy);
+}
+
 void	ft_few_args(t_list **stack)
 {
 	if (ft_lstsize(*stack) == 4)
 		ft_sort_four(stack);
 	ft_sort_three(stack);
-	ft_sort_two(stack);
 	ft_lstiter(*stack, ft_print_content);
 	return ;
 }
@@ -32,7 +42,7 @@ void    ft_sort_three(t_list **stack)
 	int c;
 	int	a;
 
-	if (!(*stack) || !(*stack) -> next)
+	if (!(*stack) || !(*stack) -> next || !(*stack) -> next -> next)
 		return ;
     ft_sort_two(stack);
 	if ( !(*stack) -> next -> next)
