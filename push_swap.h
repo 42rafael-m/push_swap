@@ -34,8 +34,11 @@ void    ft_rotate_a(t_list **stack);
 t_list	*ft_find_max(t_list *list);
 t_list	*ft_find_min(t_list *list);
 int	    ft_is_rev_sorted(t_list *stack);
-t_list  *ft_find_node_target(t_list *head, t_list *stack);
+t_list  *ft_find_node_target_a(t_list *head, t_list *stack);
+t_list  *ft_find_node_target_b(t_list *head, t_list *stack);
 int	    ft_choose_op(t_list *stack, t_list *node);
-int	ft_choose_target(int *cost_a, int *cost_b, t_list **stack_a, t_list **stack_b);
+t_list	*ft_choose_target_a(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
+t_list	*ft_choose_target_b(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
+int	ft_rotate_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
 
 #endif

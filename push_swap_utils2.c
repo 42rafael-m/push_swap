@@ -1,6 +1,33 @@
 #include "push_swap.h"
 
-t_list  *ft_find_node_target(t_list *head, t_list *stack)
+t_list  *ft_find_node_target_b(t_list *head, t_list *stack)
+{
+	t_list	*r;
+	int	closest;
+	int	content;
+	int	content_a;
+
+	if (!head || !stack)
+		return (NULL);
+	closest = INT_MAX;
+	content = *(int *)head -> content;
+	r = stack;
+	while (stack)
+	{
+		content_a = *(int *)stack -> content;
+		if (content_a > content && content_a < closest)
+		{
+			r = stack;
+			closest = content_a;
+		}
+		stack = stack -> next;
+	}
+	if (!r)
+		r = ft_find_min(stack);
+	return (r);
+}
+
+t_list  *ft_find_node_target_a(t_list *head, t_list *stack)
 {
 	t_list	*r;
 	int	closest;
@@ -15,18 +42,15 @@ t_list  *ft_find_node_target(t_list *head, t_list *stack)
 	while (stack)
 	{
 		content_b = *(int *)stack -> content;
-		// printf("content_b = %d\n", content_b);
 		if (content_b < content && content_b > closest)
 		{
 			r = stack;
 			closest = content_b;
-			// printf("content_b = %d\n", content_b);
 		}
 		stack = stack -> next;
 	}
 	if (!r)
 		r = ft_find_max(stack);
-	// printf("target = %p\n", r);
 	return (r);
 }
 
