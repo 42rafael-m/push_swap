@@ -6,6 +6,9 @@ t_list	*ft_find_max(t_list *list)
     int max;
 
     max = INT_MIN;
+	if (!list)
+		return (NULL);
+	r = list;
     while (list)
     {
         if (*(int *)list -> content > max)
@@ -15,6 +18,7 @@ t_list	*ft_find_max(t_list *list)
         }
         list = list -> next;
     }
+	printf("r = %d\n", *(int *)r -> content);
     return (r);
 }
 
@@ -23,6 +27,9 @@ t_list	*ft_find_min(t_list *list)
     t_list  *r;
     int min;
 
+	if (!list)
+		return (NULL);
+	r = list;
     min = INT_MAX;
     while (list)
     {
@@ -36,11 +43,73 @@ t_list	*ft_find_min(t_list *list)
     return (r);
 }
 
-// int	ft_push_swap(t_list **stack_a, t_list **stack_b)
-// {   
+// int	ft_find_cost(stack_a, stack_b, target)
+// {
+// 	t_list	*target;
+// 	int	cost_a;
+// 	int	cost_b;
 
-// 	return (0);
+// 	target = ft_find_a_target(stack_a, stack_b);
+// 	cost_a = ft_choose_op(*stack_b, target);
+// 	cost_b = ft_choose_op(*stack_a, ft_find_min(stack_a));
 // }
+
+int	ft_push_swap(t_list **stack_a, t_list **stack_b)
+{  
+	t_list	*target;
+	int	cost_a;
+	int	cost_b;
+	int	op;
+	// int	total;
+
+	if (!stack_a || !stack_b || !*stack_a || !*stack_b)
+		return (1);
+	while (ft_lstsize(*stack_a) > 4)
+	{
+		// ft_find_cost();
+		if (!ft_strncmp((char *)(*stack_b) -> content, "Eliminar este nodo", 19))
+		{
+			ft_push_a(stack_a, stack_b);
+			ft_lstdelone(ft_lstlast(*stack_b), free);
+			(*stack_b) -> next = NULL;
+			continue ;
+		}
+		printf("*stack_b = %p\n", stack_b);
+		printf("*stack_a = %p\n", stack_a);
+		target = ft_find_a_target(*stack_a, *stack_b);
+		if (!target)
+			return (1);
+		printf("target = %p\n", target);
+		cost_a = ft_choose_op(*stack_b, target);
+		printf("cost_a = %d\n", cost_a);
+		cost_b = ft_choose_op(*stack_a, ft_find_min(*stack_a));
+		if (cost_a == INT_MIN || cost_b == INT_MIN)
+			return (1);
+		printf("cost_b = %d\n", cost_b);
+		// total = cost_a + cost_b;	
+		if (cost_b > 0)
+			while (cost_b-- > 0)
+				ft_rotate_b(stack_b);
+		if (cost_b < 0)
+			while (cost_b++ > 0)
+				ft_rotate_b(stack_b);
+		ft_push_a(stack_a, stack_b);	
+		printf("stack_a = %p\n", stack_a);
+		printf("stack_b= %p\n", stack_b);
+	}
+	ft_sort_four(stack_a);
+	op = ft_choose_op(*stack_b, ft_find_min(*stack_b));
+	if (op > 0)
+		while (op-- >= 0)
+			ft_rotate_b(stack_b);
+	if (op < 0)
+		while (op++ <= 0)
+			ft_rev_rot_b(stack_b);
+	printf("\nstack_b = ");
+	ft_lstiter(*stack_b, ft_print_content);
+	printf("\n");
+	return (0);
+}
 
 int ft_valid_args(int argc, char **argv)
 {
@@ -128,30 +197,30 @@ void    ft_print_content(void *s)
     return ; 
 }
 
-// int main(int argc, char **argv)
-// {
-//     t_list    *stack_a;
-//     t_list    *stack_b;
-//     char *content;
+int main(int argc, char **argv)
+{
+    t_list    *stack_a;
+    t_list    *stack_b;
+    char *content;
  
-//     if (argc <= 1)
-//         return (write(2, "Error\n", 6), 1);
-//     if (ft_valid_args(argc, argv) == 1)
-//         return (write(2, "Error\n", 6), 1);
-//     stack_a = ft_stack_a(argc, argv);
-//     if (!stack_a)
-//         return (write(2, "Error\n", 6), 3);
-// 		if (ft_is_sorted(stack_a))
-// 		return (ft_lstiter(stack_a, ft_print_content), 0);
-// 	if (argc <= 5)
-// 		return (ft_few_args(&stack_a), 0);
-//     content = ft_strdup("Eliminar este nodo");
-//     if (!content)
-//         return (1);
-//     stack_b = ft_lstnew(content);
-//     ft_push_swap(&stack_a, &stack_b);
-//     ft_lstiter(stack_a, ft_print_content);
-//     ft_lstclear(&stack_a, free);
-//     ft_lstclear(&stack_b, free);
-//     return (0);
-// }
+    if (argc <= 1)
+        return (write(2, "Error\n", 6), 1);
+    if (ft_valid_args(argc, argv) == 1)
+        return (write(2, "Error\n", 6), 1);
+    stack_a = ft_stack_a(argc, argv);
+    if (!stack_a)
+        return (write(2, "Error\n", 6), 3);
+		if (ft_is_sorted(stack_a))
+		return (ft_lstiter(stack_a, ft_print_content), 0);
+	if (argc <= 5)
+		return (ft_few_args(&stack_a), 0);
+    content = ft_strdup("Eliminar este nodo");
+    if (!content)
+        return (1);
+    stack_b = ft_lstnew(content);
+    ft_push_swap(&stack_a, &stack_b);
+    ft_lstiter(stack_a, ft_print_content);
+    ft_lstclear(&stack_a, free);
+    ft_lstclear(&stack_b, free);
+    return (0);
+}

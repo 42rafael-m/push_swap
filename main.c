@@ -20,6 +20,7 @@ int main(int argc, char **argv)
 	printf("n = %d\n", n);
 	printf("sb = %p\n", stackb);
 	printf("s = %p\n", stack);
+	ft_push_swap(stack, stackb);
     // ft_lstiter(stack, ft_print_content);
     // ft_print_content(stack ->content);
     // printf("\n min = %p\n", min);

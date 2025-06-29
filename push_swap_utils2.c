@@ -11,17 +11,21 @@ t_list  *ft_find_a_target(t_list *head, t_list *stack)
 		return (NULL);
 	closest = INT_MIN;
 	content = *(int *)head -> content;
-	r = NULL;
+	r = stack;
 	while (stack)
 	{
 		content_b = *(int *)stack -> content;
-		if (content_b < content && content_b >= closest)
+		printf("content_b = %d\n", content_b);
+		if (content_b < content && content_b > closest)
 		{
 			r = stack;
 			closest = content_b;
 		}
 		stack = stack -> next;
 	}
+	if (!r)
+		r = ft_find_max(stack);
+	printf("target = %p\n", r);
 	return (r);
 }
 
@@ -40,7 +44,7 @@ t_list  *ft_find_b_target(t_list *head, t_list *stack)
 	while (stack)
 	{
 		content_a = *(int *)stack -> content;
-		if (content_a < content && content_a <= closest)
+		if (content_a < content && content_a < closest)
 		{
 			r = stack;
 			closest = content_a;
@@ -50,14 +54,14 @@ t_list  *ft_find_b_target(t_list *head, t_list *stack)
 	return (r);
 }
 
-int	ft_choose_operation(t_list *stack, t_list *node)
+int	ft_choose_op(t_list *stack, t_list *node)
 {
 	int	size;
 	int	pos;
 
     if (!stack)
         return (INT_MIN);
-	size = ft_lstsize(stack);
+		size = ft_lstsize(stack);
 	pos = 0;
 	while (stack)
 	{
@@ -71,3 +75,10 @@ int	ft_choose_operation(t_list *stack, t_list *node)
 	pos = size - pos;
 	return (-pos);
 }
+
+// int	ft_push_cost(t_list *stack_a, t_list *stack_b, t_list *target)
+// {
+// 	int	cost;
+
+// 	cost = ft_
+// }
