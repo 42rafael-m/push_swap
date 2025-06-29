@@ -15,17 +15,18 @@ t_list  *ft_find_a_target(t_list *head, t_list *stack)
 	while (stack)
 	{
 		content_b = *(int *)stack -> content;
-		printf("content_b = %d\n", content_b);
+		// printf("content_b = %d\n", content_b);
 		if (content_b < content && content_b > closest)
 		{
 			r = stack;
 			closest = content_b;
+			// printf("content_b = %d\n", content_b);
 		}
 		stack = stack -> next;
 	}
 	if (!r)
 		r = ft_find_max(stack);
-	printf("target = %p\n", r);
+	// printf("target = %p\n", r);
 	return (r);
 }
 
