@@ -1,16 +1,16 @@
 #include "push_swap.h"
 
-t_list  *ft_find_node_target_b(t_list *head, t_list *stack)
+t_list  *ft_find_node_target_b(t_list *node, t_list *stack)
 {
 	t_list	*r;
 	int	closest;
 	int	content;
 	int	content_a;
 
-	if (!head || !stack)
+	if (!node || !stack)
 		return (NULL);
 	closest = INT_MAX;
-	content = *(int *)head -> content;
+	content = *(int *)node -> content;
 	r = stack;
 	while (stack)
 	{
@@ -27,17 +27,17 @@ t_list  *ft_find_node_target_b(t_list *head, t_list *stack)
 	return (r);
 }
 
-t_list  *ft_find_node_target_a(t_list *head, t_list *stack)
+t_list  *ft_find_node_target_a(t_list *node, t_list *stack)
 {
 	t_list	*r;
 	int	closest;
 	int	content;
 	int	content_b;
 
-	if (!head || !stack)
+	if (!node || !stack)
 		return (NULL);
 	closest = INT_MIN;
-	content = *(int *)head -> content;
+	content = *(int *)node -> content;
 	r = stack;
 	while (stack)
 	{
@@ -54,17 +54,17 @@ t_list  *ft_find_node_target_a(t_list *head, t_list *stack)
 	return (r);
 }
 
-t_list  *ft_find_b_target(t_list *head, t_list *stack)
+t_list  *ft_find_b_target(t_list *node, t_list *stack)
 {
 	t_list	*r;
 	int	closest;
 	int	content;
 	int	content_a;
 
-	if (!head || !stack)
+	if (!node || !stack)
 		return (NULL);
 	closest = INT_MAX;
-	content = *(int *)head -> content;
+	content = *(int *)node -> content;
 	r = NULL;
 	while (stack)
 	{
@@ -86,8 +86,8 @@ int	ft_choose_op(t_list *stack, t_list *node)
 
     if (!stack)
         return (INT_MIN);
-		size = ft_lstsize(stack);
-	pos = 0;
+		pos = 0;
+	size = ft_lstsize(stack);
 	while (stack)
 	{
 		if (*(int *)stack -> content == *(int *)node -> content)
