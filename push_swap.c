@@ -43,31 +43,65 @@ t_list	*ft_find_min(t_list *list)
     return (r);
 }
 
-// int	ft_find_cost(stack_a, stack_b, target)
-// {
-// 	t_list	*target;
-// 	int	cost_a;
-// 	int	cost_b;
+int	ft_choose_target(int *cost_a, int *cost_b, t_list **stack_a, t_list **stack_b)
+{
+	int	i;
+	int	total;
+	t_list *target;
 
-// 	target = ft_find_a_target(stack_a, stack_b);
-// 	cost_a = ft_choose_op(*stack_b, target);
-// 	cost_b = ft_choose_op(*stack_a, ft_find_min(stack_a));
-// }
+	i = 0;
+	total = 0;
+	target = NULL;
+	while (i < ft_lstsize(*stack_a))
+	{
+		target = ft_find_node_target(*stack_a, *stack_b);
+		if (!target)
+			return (1);
+		if (total > (abs(ft_choose_op(*stack_b, target)) + abs(ft_choose_op(*stack_a, ft_find_min(*stack_a)))))
+			continue ;
+		*cost_b = ft_choose_op(*stack_b, target);
+		*cost_a = ft_choose_op(*stack_a, ft_find_min(*stack_a));
+		total = *cost_a + *cost_b;
+		if (*cost_a == INT_MIN || *cost_b == INT_MIN)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
-int	ft_push_swap(t_list **stack_a, t_list **stack_b)
+int	ft_rotate_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b)
+{
+	if (!stack_a || ! stack_b || !*stack_a || !*stack_b)
+		return (1);
+	if (cost_a > 0 && cost_b > 0)
+		while (cost_a-- > 0 && cost_b-- > 0)
+			ft_rotate_r(stack_a, stack_b);
+	if (cost_a < 0 && cost_b < 0)
+		while (cost_a++ < 0 && cost_b++ < 0)
+			ft_rev_rot_r(stack_a, stack_b);
+	if (cost_b > 0)
+		while (cost_b-- > 0)
+			ft_rotate_b(stack_b);
+	if (cost_b < 0)
+		while (cost_b++ > 0)
+			ft_rev_rot_b(stack_b);
+	if (cost_b > 0)
+		while (cost_a-- > 0)
+			ft_rotate_b(stack_a);
+	if (cost_a < 0)
+		while (cost_a++ < 0)
+			ft_rev_rot_b(stack_a);
+	return (0);
+}
+int	ft_push_swap(t_list **stack_a, t_list **stack_b, int count)
 {  
-	t_list	*target;
 	int	cost_a;
 	int	cost_b;
-	int	total;
-	int	i;
 
 	if (!stack_a || !stack_b || !*stack_a || !*stack_b)
 		return (1);
-	total = 0;
-	while (ft_lstsize(*stack_a) > 4)
+	while (ft_lstsize(*stack_a) > count)
 	{
-		// ft_find_cost();
 		if (!ft_strncmp((char *)(*stack_b) -> content, "Eliminar este nodo", 19))
 		{
 			ft_push_a(stack_a, stack_b);
@@ -75,83 +109,20 @@ int	ft_push_swap(t_list **stack_a, t_list **stack_b)
 			(*stack_b) -> next = NULL;
 			continue ;
 		}
-		i = 0;
-		while (i < ft_lstsize(*stack_a))
-		{
-			target = ft_find_a_target(*stack_a, *stack_b);
-			if (!target)
-				return (1);
-			if (total > (abs(ft_choose_op(*stack_b, target)) + abs(ft_choose_op(*stack_a, ft_find_min(*stack_a)))))
-				continue ;
-			cost_b = ft_choose_op(*stack_b, target);
-			cost_a = ft_choose_op(*stack_a, ft_find_min(*stack_a));
-			total = cost_a + cost_b;
-			if (cost_a == INT_MIN || cost_b == INT_MIN)
-				return (1);
-			i++;
-		}
-		printf("target = %d\n", *(int *)target -> content);
-		printf("cost_b = %d\n", cost_b);
-		printf("cost_a = %d\n", cost_a);
-		if (cost_b > 0)
-		{
-			while (cost_b > 0)
-			{
-				ft_rotate_b(stack_b);
-				cost_b--;
-			}
-		}
-		if (cost_b < 0)
-		{
-			while (cost_b++ > 0)
-			{
-				ft_rev_rot_b(stack_b);
-				cost_b++;
-			}
-		}
-		if (cost_b > 0)
-		{
-			while (cost_a > 0)
-			{
-				ft_rotate_b(stack_a);
-				cost_a--;
-			}
-		}
-		if (cost_a < 0)
-		{
-			while (cost_a++ > 0)
-			{
-				ft_rev_rot_b(stack_a);
-				cost_a++;
-			}
-		}
+		ft_choose_target(&cost_a, &cost_b, stack_a, stack_b);
+		ft_rotate_cost(cost_a, cost_b, stack_a, stack_b);
 		ft_push_a(stack_a, stack_b);
-		printf("stack_b = ");
-		ft_lstiter(*stack_b, ft_print_content);
-		printf("\n");
-		printf("stack_a = ");
-		ft_lstiter(*stack_a, ft_print_content);
-		printf("\n");
+		// printf("stack_b = ");
+		// ft_lstiter(*stack_b, ft_print_content);
+		// printf("\n");
+		// printf("stack_a = ");
+		// ft_lstiter(*stack_a, ft_print_content);
+		// printf("\n");
 		// printf("stack_a = %p\n", stack_a);
 		// printf("stack_b= %p\n", stack_b);
 	}
-	ft_sort_four(stack_a);
-	printf("\nstack_a = ");
-	ft_lstiter(*stack_a, ft_print_content);
-	printf("\n");
-	printf("\nstack_b = ");
-	ft_lstiter(*stack_b, ft_print_content);
-	while (*stack_b)
-	{
-		ft_push_b(stack_b, stack_a);
-		printf("\nstack_a = ");
-		ft_lstiter(*stack_a, ft_print_content);
-		printf("\nstack_b = ");
-		ft_lstiter(*stack_b, ft_print_content);
-	}
-	printf("\nstack_a = ");
-	ft_lstiter(*stack_a, ft_print_content);
-	printf("\n");
+	if (ft_lstsize(*stack_a) == 4)
+		ft_sort_four(stack_a);
 	return (0);
 }
 
@@ -246,6 +217,7 @@ int main(int argc, char **argv)
     t_list    *stack_a;
     t_list    *stack_b;
     char *content;
+	int	count;
  
     if (argc <= 1)
         return (write(2, "Error\n", 6), 1);
@@ -262,8 +234,17 @@ int main(int argc, char **argv)
     if (!content)
         return (1);
     stack_b = ft_lstnew(content);
-    ft_push_swap(&stack_a, &stack_b);
+	if (!stack_b)
+		return (1);
+	count = 4;
+    ft_push_swap(&stack_a, &stack_b, count);
+	count = 0;
+	ft_push_swap(&stack_b, &stack_a, count);
+	printf("stack_a = ");
     ft_lstiter(stack_a, ft_print_content);
+	printf("\nstack_b = ");
+	ft_lstiter(stack_b, ft_print_content);
+	printf("\n");
     ft_lstclear(&stack_a, free);
     ft_lstclear(&stack_b, free);
     return (0);

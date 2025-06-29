@@ -11,7 +11,7 @@
 # define INV_CHARS " !\"#$%&'()*./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"
 
-int     ft_push_swap(t_list **stack_a, t_list **stack_b);
+int     ft_push_swap(t_list **stack_a, t_list **stack_b, int count);
 void	*ft_copy_content(void *content);
 void    ft_sort_two(t_list **stack);
 void	ft_few_args(t_list **stack);
@@ -34,8 +34,8 @@ void    ft_rotate_a(t_list **stack);
 t_list	*ft_find_max(t_list *list);
 t_list	*ft_find_min(t_list *list);
 int	    ft_is_rev_sorted(t_list *stack);
-t_list  *ft_find_b_target(t_list *head, t_list *stack);
-t_list  *ft_find_a_target(t_list *head, t_list *stack);
+t_list  *ft_find_node_target(t_list *head, t_list *stack);
 int	    ft_choose_op(t_list *stack, t_list *node);
+int	ft_choose_target(int *cost_a, int *cost_b, t_list **stack_a, t_list **stack_b);
 
 #endif

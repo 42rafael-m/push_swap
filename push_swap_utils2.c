@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_list  *ft_find_a_target(t_list *head, t_list *stack)
+t_list  *ft_find_node_target(t_list *head, t_list *stack)
 {
 	t_list	*r;
 	int	closest;
