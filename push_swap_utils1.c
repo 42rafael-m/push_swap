@@ -15,8 +15,9 @@ void	ft_few_args(t_list **stack)
 {
 	if (ft_lstsize(*stack) == 4)
 		ft_sort_four(stack);
+	ft_sort_two(stack);
 	ft_sort_three(stack);
-	ft_lstiter(*stack, ft_print_content);
+	// ft_lstiter(*stack, ft_print_content);
 	return ;
 }
 
@@ -44,7 +45,6 @@ void    ft_sort_three(t_list **stack)
 
 	if (!(*stack) || !(*stack) -> next || !(*stack) -> next -> next)
 		return ;
-    ft_sort_two(stack);
 	if ( !(*stack) -> next -> next)
 		return ;
 	a = *(int *)(*stack) -> content;
@@ -54,9 +54,12 @@ void    ft_sort_three(t_list **stack)
 	{
 		if (c < a)
 			return (ft_rev_rot_a(stack));
-		ft_rotate_a(stack);
-		ft_swap_a(stack);
-		ft_rev_rot_a(stack);
+		else
+		{
+			ft_rotate_a(stack);
+			ft_swap_a(stack);
+			ft_rev_rot_a(stack);
+		}
 	}
     return ;
 }

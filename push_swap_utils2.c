@@ -100,10 +100,3 @@ int	ft_choose_op(t_list *stack, t_list *node)
 	pos = size - pos;
 	return (-pos);
 }
-
-// int	ft_push_cost(t_list *stack_a, t_list *stack_b, t_list *target)
-// {
-// 	int	cost;
-
-// 	cost = ft_
-// }

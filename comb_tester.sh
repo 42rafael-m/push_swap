@@ -18,7 +18,7 @@ LOG_FILE="log.txt"
 # Prepara log
 : > "$LOG_FILE"   # trunca o crea
 
-MAX=34
+MAX=155
 line_no=0
 while IFS= read -r raw; do
   ((line_no++))
