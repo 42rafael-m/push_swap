@@ -63,10 +63,8 @@ t_list	*ft_choose_target_b(t_list **stack_b, t_list **stack_a)
 		target = ft_find_node_target_b(node, *stack_a);
 		if (!target)
 			return (NULL);
-		// printf("target_b = %d\n", *(int *)target -> content);
 		cost_a = ft_choose_op(*stack_a, target);
 		cost_b = ft_choose_op(*stack_b, node);
-		// printf("ca = %d, cb = %d\n", cost_a, cost_b);
 		total = ft_abs(cost_a) + ft_abs(cost_b);
 
 		if (cost_a == INT_MIN || cost_b == INT_MIN)
@@ -74,10 +72,6 @@ t_list	*ft_choose_target_b(t_list **stack_b, t_list **stack_a)
 		node = node -> next;
 	}
 	ft_rotate_cost(cost_a, cost_b, stack_a, stack_b);
-	// ft_lstiter((*stack_a), ft_print_content);
-	// printf("\n");
-	// ft_lstiter((*stack_b), ft_print_content);
-	// printf("\n");
 	return (target);
 }
 
@@ -166,10 +160,6 @@ int	ft_push_swap_a(t_list **stack_a, t_list **stack_b)
 		ft_push_a(stack_a, stack_b);
 	}
 	ft_sort_three(stack_a);
-	// ft_lstiter((*stack_a), ft_print_content);
-	// printf("\n");
-	// ft_lstiter((*stack_b), ft_print_content);
-	// printf("\n");
 	return (0);
 }
 
@@ -185,10 +175,7 @@ int	ft_push_swap_b(t_list **stack_a, t_list **stack_b)
 		ft_choose_target_b(stack_b, stack_a);
 		ft_push_b(stack_b, stack_a);
 	}
-	// ft_lstiter(*stack_a, ft_print_content);
-	// printf("\n");
 	op = ft_choose_op(*stack_a, ft_find_min(*stack_a));
-	// printf("op = %d\n", op);
 	ft_rotate_cost(op, 0, stack_a, stack_a);
 	return (0);
 }
@@ -260,18 +247,18 @@ int	ft_is_sorted(t_list *stack)
 	return (1);
 }
 
-int	ft_is_rev_sorted(t_list *stack)
-{
-	if (!stack)
-		return (0);
-	while (stack && stack -> next)
-	{
-		if (*(int *)stack -> content < *(int *)stack -> next -> content)
-			return (0);
-		stack = stack -> next;
-	}
-	return (1);
-}
+// int	ft_is_rev_sorted(t_list *stack)
+// {
+// 	if (!stack)
+// 		return (0);
+// 	while (stack && stack -> next)
+// 	{
+// 		if (*(int *)stack -> content < *(int *)stack -> next -> content)
+// 			return (0);
+// 		stack = stack -> next;
+// 	}
+// 	return (1);
+// }
 
 void    ft_print_content(void *s)
 {
@@ -295,16 +282,23 @@ int main(int argc, char **argv)
 		if (ft_is_sorted(stack_a))
 		return (ft_lstiter(stack_a, ft_print_content), 0);
 	if (argc <= 4)
-		return (ft_sort_three(&stack_a), ft_lstiter(stack_a, ft_print_content), 0);
+	{
+		ft_sort_three(&stack_a);
+		while (stack_a != ft_find_min(stack_a))
+			ft_rev_rot_a(&stack_a);
+		return (ft_lstiter(stack_a, ft_print_content), 0);
+	}
     content = ft_strdup("Eliminar este nodo");
-    if (!content)
-        return (1);
     stack_b = ft_lstnew(content);
 	if (!stack_b)
 		return (1);
     ft_push_swap_a(&stack_a, &stack_b);
+	// ft_lstiter(stack_a, ft_print_content);
+	// printf("\n");
+	// ft_lstiter(stack_b, ft_print_content);
+	// printf("\n");
 	ft_push_swap_b(&stack_a, &stack_b);
 	ft_lstiter(stack_a, ft_print_content);
-	write(1, "\n", 1);
+	printf("\n");
     return (0);
 }
