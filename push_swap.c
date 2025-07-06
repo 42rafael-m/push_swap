@@ -153,7 +153,7 @@ int	ft_push_swap_a(t_list **stack_a, t_list **stack_b)
 {
 	if (!stack_a || !stack_b || !*stack_a || !*stack_b)
 		return (1);
-	while (ft_lstsize(*stack_a) > 4)
+	while (ft_lstsize(*stack_a) > 3)
 	{
 		if (!ft_strncmp((char *)(*stack_b) -> content, "Eliminar este nodo", 19))
 		{
@@ -165,7 +165,7 @@ int	ft_push_swap_a(t_list **stack_a, t_list **stack_b)
 		ft_choose_target_a(stack_a, stack_b);
 		ft_push_a(stack_a, stack_b);
 	}
-	ft_sort_four(stack_a);
+	ft_sort_three(stack_a);
 	// ft_lstiter((*stack_a), ft_print_content);
 	// printf("\n");
 	// ft_lstiter((*stack_b), ft_print_content);
@@ -294,8 +294,8 @@ int main(int argc, char **argv)
         return (write(2, "Error\n", 6), 3);
 		if (ft_is_sorted(stack_a))
 		return (ft_lstiter(stack_a, ft_print_content), 0);
-	if (argc <= 5)
-		return (ft_few_args(&stack_a), ft_lstiter(stack_a, ft_print_content), 0);
+	if (argc <= 4)
+		return (ft_sort_three(&stack_a), ft_lstiter(stack_a, ft_print_content), 0);
     content = ft_strdup("Eliminar este nodo");
     if (!content)
         return (1);
@@ -305,5 +305,6 @@ int main(int argc, char **argv)
     ft_push_swap_a(&stack_a, &stack_b);
 	ft_push_swap_b(&stack_a, &stack_b);
 	ft_lstiter(stack_a, ft_print_content);
+	write(1, "\n", 1);
     return (0);
 }

@@ -43,9 +43,10 @@ void    ft_sort_three(t_list **stack)
 	int c;
 	int	a;
 
-	if (!(*stack) || !(*stack) -> next || !(*stack) -> next -> next)
+	if (!(*stack) || !(*stack) -> next)
 		return ;
-	if ( !(*stack) -> next -> next)
+	ft_sort_two(stack);
+	if (!(*stack) -> next -> next)
 		return ;
 	a = *(int *)(*stack) -> content;
 	b = *(int *)(*stack) -> next -> content;
