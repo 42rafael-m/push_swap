@@ -9,16 +9,39 @@ declare -A BENCH=(
   [3]=5
   [4]=12
   [5]=12
+  [6]=700
+  [7]=700
+  [8]=700
+  [9]=700
+  [10]=700
+  [20]=700
+  [30]=700
+  [40]=700
+  [50]=700
+  [60]=700
+  [70]=700
+  [80]=700
+  [90]=700
+  [100]=700
+  [150]=5500
+  [200]=5500
+  [250]=5500
+  [300]=5500
+  [350]=5500
+  [400]=5500
+  [450]=5500
+  [500]=5500
+
   # …añade más según necesites…
 )
 
-TEST_FILE="tests.txt"
-LOG_FILE="log.txt"
+TEST_FILE="utils/tests.txt"
+LOG_FILE="utils/log.txt"
 
 # Prepara log
 : > "$LOG_FILE"   # trunca o crea
 
-MAX=155
+MAX=1820
 line_no=0
 while IFS= read -r raw; do
   ((line_no++))
