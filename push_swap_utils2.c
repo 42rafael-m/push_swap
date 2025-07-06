@@ -3,6 +3,7 @@
 t_list  *ft_find_node_target_b(t_list *node, t_list *stack)
 {
 	t_list	*r;
+	t_list	*start;
 	int	closest;
 	int	content;
 	int	content_a;
@@ -11,7 +12,8 @@ t_list  *ft_find_node_target_b(t_list *node, t_list *stack)
 		return (NULL);
 	closest = INT_MAX;
 	content = *(int *)node -> content;
-	r = stack;
+	r = NULL;
+	start = stack;
 	while (stack)
 	{
 		content_a = *(int *)stack -> content;
@@ -23,7 +25,7 @@ t_list  *ft_find_node_target_b(t_list *node, t_list *stack)
 		stack = stack -> next;
 	}
 	if (!r)
-		r = ft_find_min(stack);
+		r = ft_find_min(start);
 	return (r);
 }
 
@@ -95,8 +97,10 @@ int	ft_choose_op(t_list *stack, t_list *node)
 		pos++;
 		stack = stack -> next;
 	}
+	// printf("pos = %d\n", pos);
 	if (pos <= (size / 2))
 		return (pos);
 	pos = size - pos;
+	// printf("pos = %d\n", pos);
 	return (-pos);
 }
