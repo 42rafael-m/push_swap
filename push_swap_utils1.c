@@ -33,7 +33,7 @@ void    ft_sort_three(t_list **stack)
 	int c;
 	int	a;
 
-	if (!(*stack) || !(*stack) -> next)
+	if (!(*stack) || !(*stack) -> next || ft_is_sorted(*stack))
 		return ;
 	ft_sort_two(stack);
 	if (!(*stack) -> next -> next)
@@ -49,7 +49,6 @@ void    ft_sort_three(t_list **stack)
 		{
 			ft_rotate_a(stack);
 			ft_swap_a(stack);
-			// ft_rev_rot_a(stack);
 		}
 	}
     return ;

@@ -18,11 +18,7 @@ SRC = ft_atoi.c ft_isascii.c ft_memcmp.c \
       ft_fibonacci.c ft_convert_base.c ft_nbr_base_len.c\
       ft_neg.c ft_putnbr.c ft_free_d.c\
       ft_strnchr.c ft_esc_char.c ft_free_prev_d.c\
-<<<<<<< HEAD
       ft_atol.c ft_abs.c ft_doubleptr_len.c
-=======
-      ft_atol.c ft_abs.c
->>>>>>> 6948cc32bc077400bfed0f55dd3cd33e353083c3
 
 BONUS_SRC = ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstclear_bonus.c\
 	ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstnew_bonus.c\

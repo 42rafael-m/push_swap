@@ -97,10 +97,8 @@ int	ft_choose_op(t_list *stack, t_list *node)
 		pos++;
 		stack = stack -> next;
 	}
-	// printf("pos = %d\n", pos);
 	if (pos <= (size / 2))
 		return (pos);
 	pos = size - pos;
-	// printf("pos = %d\n", pos);
 	return (-pos);
 }

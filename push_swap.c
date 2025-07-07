@@ -42,15 +42,13 @@ t_list	*ft_find_min(t_list *list)
     return (r);
 }
 
-t_list	*ft_choose_target_b(t_list **stack_b, t_list **stack_a)
+t_list	*ft_choose_target_b(t_list **stack_b, t_list **stack_a, unsigned int total)
 {
-	unsigned int	total;
 	int cost_a;
 	int	cost_b;
 	t_list *target;
 	t_list *node;
 
-	total = INT_MAX;
 	target = NULL;
 	node = *stack_b;
 	while (node)
@@ -66,24 +64,19 @@ t_list	*ft_choose_target_b(t_list **stack_b, t_list **stack_a)
 		cost_a = ft_choose_op(*stack_a, target);
 		cost_b = ft_choose_op(*stack_b, node);
 		total = ft_abs(cost_a) + ft_abs(cost_b);
-
-		if (cost_a == INT_MIN || cost_b == INT_MIN)
-			return (NULL);
 		node = node -> next;
 	}
 	ft_rotate_cost(cost_a, cost_b, stack_a, stack_b);
 	return (target);
 }
 
-t_list	*ft_choose_target_a(t_list **stack_a, t_list **stack_b)
+t_list	*ft_choose_target_a(t_list **stack_a, t_list **stack_b, unsigned int total)
 {
-	unsigned int	total;
 	int	cost_a;
 	int	cost_b;
 	t_list *target;
 	t_list *node;
 
-	total = INT_MAX;
 	target = NULL;
 	node = *stack_a;
 	while (node)
@@ -99,12 +92,27 @@ t_list	*ft_choose_target_a(t_list **stack_a, t_list **stack_b)
 			return (NULL);
 		cost_a = ft_choose_op(*stack_b, ft_find_node_target_a(node, *stack_a));
 		cost_b = ft_choose_op(*stack_a, node);
-		if (cost_a == INT_MIN || cost_b == INT_MIN)
-			return (NULL);
 		node = node -> next;
 	}
 	ft_rotate_cost(cost_a, cost_b, stack_a, stack_b);
 	return (target);
+}
+
+int	ft_rotate_cost2(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b)
+{
+	if (cost_b > 0)
+		while (cost_b-- > 0)
+			ft_rotate_b(stack_b);
+	else if (cost_b < 0)
+		while (cost_b++ < 0)
+			ft_rev_rot_b(stack_b);
+	if (cost_a < 0)
+		while (cost_a++ < 0)
+			ft_rev_rot_a(stack_a);
+	else if (cost_a > 0)
+		while (cost_a-- > 0)
+			ft_rotate_a(stack_a);
+	return (0);
 }
 
 int	ft_rotate_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b)
@@ -129,24 +137,16 @@ int	ft_rotate_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b)
 			cost_b++;
 		}
 	}
-	if (cost_b > 0)
-		while (cost_b-- > 0)
-			ft_rotate_b(stack_b);
-	else if (cost_b < 0)
-		while (cost_b++ < 0)
-			ft_rev_rot_b(stack_b);
-	if (cost_a < 0)
-		while (cost_a++ < 0)
-			ft_rev_rot_a(stack_a);
-	else if (cost_a > 0)
-		while (cost_a-- > 0)
-			ft_rotate_a(stack_a);
+	ft_rotate_cost2(cost_a, cost_b, stack_a, stack_b);
 	return (0);
 }
+
 int	ft_push_swap_a(t_list **stack_a, t_list **stack_b)
 {
 	if (!stack_a || !stack_b || !*stack_a || !*stack_b)
 		return (1);
+	if (ft_is_sorted(*stack_a))
+		return (ft_lstclear(stack_b, free), stack_b = NULL, 0);
 	while (ft_lstsize(*stack_a) > 3)
 	{
 		if (!ft_strncmp((char *)(*stack_b) -> content, "Eliminar este nodo", 19))
@@ -156,7 +156,7 @@ int	ft_push_swap_a(t_list **stack_a, t_list **stack_b)
 			(*stack_b) -> next = NULL;
 			continue ;
 		}
-		ft_choose_target_a(stack_a, stack_b);
+		ft_choose_target_a(stack_a, stack_b, INT_MAX);
 		ft_push_a(stack_a, stack_b);
 	}
 	ft_sort_three(stack_a);
@@ -172,7 +172,7 @@ int	ft_push_swap_b(t_list **stack_a, t_list **stack_b)
 	op = 0;
 	while (ft_lstsize(*stack_b) > 0)
 	{
-		ft_choose_target_b(stack_b, stack_a);
+		ft_choose_target_b(stack_b, stack_a, INT_MAX);
 		ft_push_b(stack_b, stack_a);
 	}
 	op = ft_choose_op(*stack_a, ft_find_min(*stack_a));
@@ -253,38 +253,44 @@ void    ft_print_content(void *s)
     return ; 
 }
 
-int main(int argc, char **argv)
+t_list	*ft_load_stck_a(int *argc, char **argv)
 {
-    t_list    *stack_a;
-    t_list    *stack_b;
-    char	*content;
+	t_list	*stack_a;
 	char	*t;
- 
-    if (argc <= 1)
-        return (write(2, "Error\n", 6), 1);
-		if (argc == 2 && ft_strchr(argv[1], ' '))
+
+	if (*argc == 2 && ft_strchr(argv[1], ' '))
 	{
 		t = ft_strjoin("1 ", argv[1]);
 		argv = ft_split(t, ' ');
 		free(t);
 		if (!argv)
-			return (write(2, "Error\n", 6), 1);
-		argc = ft_doubleptr_len(argv);
-		if (ft_valid_args(argc, argv) == 1)
-        	return (ft_free_d(argv), write(2, "Error\n", 6), 1);
-    	stack_a = ft_stack_a(argc, argv);
+			return (write(2, "Error\n", 6), NULL);
+		*argc = ft_doubleptr_len(argv);
+		if (ft_valid_args(*argc, argv) == 1)
+        	return (ft_free_d(argv), write(2, "Error\n", 6), NULL);
+    	stack_a = ft_stack_a(*argc, argv);
 		ft_free_d(argv);
 	}
 	else
 	{
-		if (ft_valid_args(argc, argv) == 1)
-        	return (write(2, "Error\n", 6), 1);
-		stack_a = ft_stack_a(argc, argv);
+		if (ft_valid_args(*argc, argv) == 1)
+        	return (write(2, "Error\n", 6), NULL);
+		stack_a = ft_stack_a(*argc, argv);
 	}
-    if (!stack_a)
-        return (write(2, "Error\n", 6), 3);
-		if (ft_is_sorted(stack_a))
-		return (ft_lstiter(stack_a, ft_print_content), ft_lstclear(&stack_a, free), 0);
+	return (stack_a);
+}
+
+int main(int argc, char **argv)
+{
+    t_list    *stack_a;
+    t_list    *stack_b;
+    char	*content;
+ 
+    if (argc <= 1)
+        return (write(2, "Error\n", 6), 1);
+		stack_a = ft_load_stck_a(&argc, argv);
+    	if (!stack_a)
+        return (write(2, "Error\n", 6), 1);
 	if (argc <= 4)
 	{
 		ft_sort_three(&stack_a);
@@ -298,9 +304,8 @@ int main(int argc, char **argv)
 		return (1);
     ft_push_swap_a(&stack_a, &stack_b);
 	ft_push_swap_b(&stack_a, &stack_b);
-	ft_lstclear(&stack_a, free);
-	if (argc == 2)
 	ft_lstiter(stack_a, ft_print_content);
 	printf("\n");
+	ft_lstclear(&stack_a, free);
     return (0);
 }

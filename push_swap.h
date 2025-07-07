@@ -37,8 +37,10 @@ int	    ft_is_rev_sorted(t_list *stack);
 t_list  *ft_find_node_target_a(t_list *node, t_list *stack);
 t_list  *ft_find_node_target_b(t_list *node, t_list *stack);
 int	    ft_choose_op(t_list *stack, t_list *node);
-t_list	*ft_choose_target_a(t_list **stack_a, t_list **stack_b);
-t_list	*ft_choose_target_b(t_list **stack_b, t_list **stack_a);
-int	ft_rotate_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
+t_list	*ft_choose_target_a(t_list **stack_a, t_list **stack_b, unsigned int total);
+t_list	*ft_choose_target_b(t_list **stack_b, t_list **stack_a, unsigned int total);
+int     ft_rotate_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
+t_list  *ft_load_stck_a(int *argc, char **argv);
+int     ft_rotate_cost2(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
 
 #endif
