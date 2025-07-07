@@ -95,6 +95,9 @@ char		*ft_esc_char(char *s);
 void   		ft_free_prev_d(char **s, int pos);
 long		ft_atol(char *s);
 unsigned int	ft_abs(int n);
+<<<<<<< HEAD
 int	ft_doubleptr_len(char **dptr);
+=======
+>>>>>>> 6948cc32bc077400bfed0f55dd3cd33e353083c3
 
 #endif
