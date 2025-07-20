@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:27:40 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 20:43:01 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:03:18 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char		*ft_strnchr(const char *s, int c, unsigned int n);
 char		*ft_esc_char(char *s);
 void		ft_free_prev_d(char **s, int pos);
 long		ft_atol(char *s);
-int			ft_dobleptr_len(char **ptr);
+int			ft_doubleptr_len(char **ptr);
 size_t		ft_abs(int n);
 
 #endif

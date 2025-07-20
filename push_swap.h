@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:40:29 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 20:24:10 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:42:09 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		ft_push_swap(t_list **stack_a, t_list **stack_b, int count);
 int		ft_is_sorted(t_list *stack);
 int		ft_is_rev_sorted(t_list *stack);
 int		ft_choose_op(t_list *stack, t_list *node);
+int		ft_push_swap_a(t_list **stack_a, t_list **stack_b);
+int		ft_push_swap_b(t_list **stack_a, t_list **stack_b);
 int		ft_rot_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
 int		ft_rot_cos(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
 void	*ft_copy_content(void *content);

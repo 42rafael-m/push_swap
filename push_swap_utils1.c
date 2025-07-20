@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:39:56 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 20:16:06 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:41:30 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,52 @@ void	ft_sort_three(t_list **stack)
 		}
 	}
 	return ;
+}
+
+int	ft_rot_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b)
+{
+	if (!stack_a || ! stack_b || !*stack_a || !*stack_b)
+		return (1);
+	if (cost_a > 0 && cost_b > 0)
+	{
+		while (cost_a > 0 && cost_b > 0)
+		{
+			ft_rotate_r(stack_a, stack_b);
+			cost_a--;
+			cost_b--;
+		}
+	}
+	else if (cost_a < 0 && cost_b < 0)
+	{
+		while (cost_a < 0 && cost_b < 0)
+		{
+			ft_rev_rot_r(stack_a, stack_b);
+			cost_a++;
+			cost_b++;
+		}
+	}
+	ft_rot_cos(cost_a, cost_b, stack_a, stack_b);
+	return (0);
+}
+
+int	ft_push_swap_a(t_list **stack_a, t_list **stack_b)
+{
+	if (!stack_a || !stack_b || !*stack_a || !*stack_b)
+		return (1);
+	if (ft_is_sorted(*stack_a))
+		return (ft_lstclear(stack_b, free), stack_b = NULL, 0);
+	while (ft_lstsize(*stack_a) > 3)
+	{
+		if (!ft_strncmp((char *)(*stack_b)-> content, "Eliminar este nodo", 19))
+		{
+			ft_push_a(stack_a, stack_b);
+			ft_lstdelone(ft_lstlast(*stack_b), free);
+			(*stack_b)-> next = NULL;
+			continue ;
+		}
+		ft_choose_target_a(stack_a, stack_b, INT_MAX);
+		ft_push_a(stack_a, stack_b);
+	}
+	ft_sort_three(stack_a);
+	return (0);
 }
