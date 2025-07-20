@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rafael-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 19:39:44 by rafael-m          #+#    #+#             */
+/*   Updated: 2025/07/20 20:12:52 by rafael-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_swap_a(t_list **stack)
 {
 	t_list	*node;
 
-	if (!*stack || !(*stack) -> next)
+	if (!*stack || !(*stack)-> next)
 		return ;
-	node = (*stack) -> next;
-	(*stack) -> next = node -> next;
+	node = (*stack)-> next;
+	(*stack)-> next = node -> next;
 	node -> next = *stack;
 	*stack = node;
 	write(1, "sa\n", 3);
@@ -18,10 +30,10 @@ void	ft_swap_b(t_list **stack)
 {
 	t_list	*node;
 
-	if (!*stack || !(*stack) -> next)
+	if (!*stack || !(*stack)-> next)
 		return ;
-	node = (*stack) -> next;
-	(*stack) -> next = node -> next;
+	node = (*stack)-> next;
+	(*stack)-> next = node -> next;
 	node -> next = *stack;
 	*stack = node;
 	write(1, "sb\n", 3);
@@ -32,14 +44,14 @@ void	ft_swap_s(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*node;
 
-	if (!*stack_a || !(*stack_a) -> next || !*stack_b || !(*stack_b) -> next)
+	if (!*stack_a || !(*stack_a)-> next || !*stack_b || !(*stack_b)-> next)
 		return ;
-	node = (*stack_a) -> next;
-	(*stack_a) -> next = node -> next;
+	node = (*stack_a)-> next;
+	(*stack_a)-> next = node -> next;
 	node -> next = *stack_a;
 	*stack_a = node;
-	node = (*stack_b) -> next;
-	(*stack_b) -> next = node -> next;
+	node = (*stack_b)-> next;
+	(*stack_b)-> next = node -> next;
 	node -> next = *stack_b;
 	*stack_b = node;
 	write(1, "ss\n", 3);
@@ -57,7 +69,7 @@ void	ft_push_b(t_list **stack_b, t_list **stack_a)
 	t -> next = *stack_a;
 	*stack_a = t;
 	write(1, "pb\n", 3);
-	return ; 
+	return ;
 }
 
 void	ft_push_a(t_list **stack_a, t_list **stack_b)
@@ -71,7 +83,7 @@ void	ft_push_a(t_list **stack_a, t_list **stack_b)
 	t -> next = *stack_b;
 	*stack_b = t;
 	write(1, "pa\n", 3);
-	return ; 
+	return ;
 }
 
 void	ft_rev_rot_a(t_list **stack)
@@ -79,10 +91,10 @@ void	ft_rev_rot_a(t_list **stack)
 	t_list	*last;
 	t_list	*node;
 
-	if (!*stack || !(*stack) -> next)
+	if (!*stack || !(*stack)-> next)
 		return ;
 	node = *stack;
-	while (node && node -> next && (node -> next) -> next)
+	while (node && node -> next && (node -> next)-> next)
 		node = node -> next;
 	last = node -> next;
 	node -> next = NULL;
@@ -97,10 +109,10 @@ void	ft_rev_rot_b(t_list **stack)
 	t_list	*last;
 	t_list	*node;
 
-	if (!*stack || !(*stack) -> next)
+	if (!*stack || !(*stack)-> next)
 		return ;
 	node = *stack;
-	while (node && node -> next && (node -> next) -> next)
+	while (node && node -> next && (node -> next)-> next)
 		node = node -> next;
 	last = node -> next;
 	node -> next = NULL;
@@ -115,17 +127,17 @@ void	ft_rev_rot_r(t_list **stack_a, t_list **stack_b)
 	t_list	*last;
 	t_list	*node;
 
-	if (!*stack_a || !(*stack_a) -> next || !*stack_b || !(*stack_b) -> next)
+	if (!*stack_a || !(*stack_a)-> next || !*stack_b || !(*stack_b)-> next)
 		return ;
 	node = *stack_a;
-	while (node && node -> next && (node -> next) -> next)
+	while (node && node -> next && (node -> next)-> next)
 		node = node -> next;
 	last = node -> next;
 	node -> next = NULL;
 	last -> next = *stack_a;
 	*stack_a = last;
 	node = *stack_b;
-	while (node && node -> next && (node -> next) -> next)
+	while (node && node -> next && (node -> next)-> next)
 		node = node -> next;
 	last = node -> next;
 	node -> next = NULL;
@@ -140,10 +152,10 @@ void	ft_rotate_a(t_list **stack)
 	t_list	*t;
 	t_list	*start;
 
-	if (!*stack || !(*stack) -> next)
+	if (!*stack || !(*stack)-> next)
 		return ;
 	start = *stack;
-	*stack = start -> next; 
+	*stack = start -> next;
 	t = ft_lstlast(*stack);
 	t -> next = start;
 	start -> next = NULL;
@@ -156,10 +168,10 @@ void	ft_rotate_b(t_list **stack)
 	t_list	*t;
 	t_list	*start;
 
-	if (!*stack || !(*stack) -> next)
+	if (!*stack || !(*stack)-> next)
 		return ;
 	start = *stack;
-	*stack = start -> next; 
+	*stack = start -> next;
 	t = ft_lstlast(*stack);
 	t -> next = start;
 	start -> next = NULL;
@@ -172,15 +184,15 @@ void	ft_rotate_r(t_list **stack_a, t_list **stack_b)
 	t_list	*t;
 	t_list	*start;
 
-	if (!*stack_a || !(*stack_a) -> next || !*stack_b || !(*stack_b) -> next)
+	if (!*stack_a || !(*stack_a)-> next || !*stack_b || !(*stack_b)-> next)
 		return ;
 	start = *stack_a;
-	*stack_a = start -> next; 
+	*stack_a = start -> next;
 	t = ft_lstlast(*stack_a);
 	t -> next = start;
 	start -> next = NULL;
 	start = *stack_b;
-	*stack_b = start -> next; 
+	*stack_b = start -> next;
 	t = ft_lstlast(*stack_b);
 	t -> next = start;
 	start -> next = NULL;

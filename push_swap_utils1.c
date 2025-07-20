@@ -1,46 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils1.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 19:39:56 by rafael-m          #+#    #+#             */
+/*   Updated: 2025/07/20 20:16:06 by rafael-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void    *ft_copy_content(void *content)
+void	*ft_copy_content(void *content)
 {
-    int     *copy;
+	int	*copy;
 
-    copy = (int *)ft_calloc(1, sizeof(int));
-    if (!copy)
-        return (NULL);
-    *copy = *(int *)content;
-    	return ((void *)copy);
+	copy = (int *)ft_calloc(1, sizeof(int));
+	if (!copy)
+		return (NULL);
+	*copy = *(int *)content;
+	return ((void *)copy);
 }
 
-void    ft_sort_two(t_list **stack)
+void	ft_sort_two(t_list **stack)
 {
-    int	a;
-	int b;
+	int	a;
+	int	b;
 
-	if (!(*stack) || !(*stack) -> next)
+	if (!(*stack) || !(*stack)-> next)
 		return ;
-	a = *(int *)(*stack) -> content;
-	b = *(int *)(*stack) -> next -> content;
-    if (a < b)
+	a = *(int *)(*stack)-> content;
+	b = *(int *)(*stack)-> next -> content;
+	if (a < b)
 		return ;
 	if (a > b)
-	    return (ft_swap_a(stack));
+		return (ft_swap_a(stack));
 	return ;
 }
 
-void    ft_sort_three(t_list **stack)
+void	ft_sort_three(t_list **stack)
 {
-	int b;
-	int c;
+	int	b;
+	int	c;
 	int	a;
 
-	if (!(*stack) || !(*stack) -> next || ft_is_sorted(*stack))
+	if (!(*stack) || !(*stack)-> next || ft_is_sorted(*stack))
 		return ;
 	ft_sort_two(stack);
-	if (!(*stack) -> next -> next)
+	if (!(*stack)-> next -> next)
 		return ;
-	a = *(int *)(*stack) -> content;
-	b = *(int *)(*stack) -> next -> content;
-    c = *(int *)(*stack) -> next -> next -> content;
+	a = *(int *)(*stack)-> content;
+	b = *(int *)(*stack)-> next -> content;
+	c = *(int *)(*stack)-> next -> next -> content;
 	if (b > c)
 	{
 		if (c < a)
@@ -51,5 +63,5 @@ void    ft_sort_three(t_list **stack)
 			ft_swap_a(stack);
 		}
 	}
-    return ;
+	return ;
 }
