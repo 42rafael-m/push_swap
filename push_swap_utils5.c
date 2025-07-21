@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 21:43:03 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:47:28 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 13:03:59 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,32 @@ void	ft_rev_rot_b(t_list **stack)
 	*stack = last;
 	write(1, "rrb\n", 4);
 	return ;
+}
+
+int	ft_rep_content(t_list *stack)
+{
+	t_list	*start;
+	int		list_len;
+	int		content;
+	int		i;
+
+	if (!stack)
+		return (-1);
+	content = 1;
+	list_len = ft_lstsize(stack);
+	start = stack;
+	i = 0;
+	while (i < list_len)
+	{
+		content = *(int *)stack->content;
+		stack = stack->next;
+		if (content == *(int *)stack->content)
+			return (1);
+		if (!stack)
+		{
+			start = start->next;
+			list_len = ft_lstsize(start);
+		}
+	}
+	return (0);
 }

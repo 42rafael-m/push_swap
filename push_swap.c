@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:39:27 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/21 12:34:24 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 13:00:14 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,14 @@ t_list	*ft_load_stck_a(int *argc, char **argv)
 			return (write(2, "Error\n", 6), NULL);
 		*argc = ft_doubleptr_len(argv);
 		if (ft_valid_args(*argc, argv) == 1)
-			return (ft_free_d(argv), write(2, "Error\n", 6), NULL);
+			return (ft_free_d(argv), NULL);
 		stack_a = ft_stack_a(*argc, argv);
 		ft_free_d(argv);
 	}
 	else
 	{
 		if (ft_valid_args(*argc, argv) == 1)
-			return (write(2, "Error\n", 6), NULL);
+			return (NULL);
 		stack_a = ft_stack_a(*argc, argv);
 	}
 	return (stack_a);
@@ -121,8 +121,8 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 		return (0);
 	stack_a = ft_load_stck_a(&argc, argv);
-	if (!stack_a)
-		return (write(2, "Error\n", 6), 1);
+	if (!stack_a || ft_rep_content(stack_a))
+		return (write(2, "Error\n", 6), ft_lstclear(&stack_a, free), 1);
 	if (argc <= 4)
 	{
 		ft_sort_three(&stack_a);

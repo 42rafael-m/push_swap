@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:40:29 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/21 12:16:20 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:56:51 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_push_swap_a(t_list **stack_a, t_list **stack_b);
 int		ft_push_swap_b(t_list **stack_a, t_list **stack_b);
 int		ft_rot_cost(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
 int		ft_rot_cos(int cost_a, int cost_b, t_list **stack_a, t_list **stack_b);
+int		ft_rep_content(t_list *stack);
 void	*ft_copy_content(void *content);
 void	ft_sort_two(t_list **stack);
 void	ft_few_args(t_list **stack);
