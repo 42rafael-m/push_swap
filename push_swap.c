@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:39:27 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/21 12:25:13 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:34:24 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	main(int argc, char **argv)
 	char	*content;
 
 	if (argc <= 1)
-		return (write(2, "Error\n", 6), 1);
+		return (0);
 	stack_a = ft_load_stck_a(&argc, argv);
 	if (!stack_a)
 		return (write(2, "Error\n", 6), 1);
