@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:39:27 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/21 12:14:09 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:25:13 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	main(int argc, char **argv)
 	content = ft_strdup("Eliminar este nodo");
 	stack_b = ft_lstnew(content);
 	if (!stack_b)
-		return (1);
+		return (write(2, "Error\n", 6), free(content), 1);
 	ft_push_swap_a(&stack_a, &stack_b);
 	ft_push_swap_b(&stack_a, &stack_b);
 	ft_lstclear(&stack_a, free);
