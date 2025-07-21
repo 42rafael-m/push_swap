@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:40:29 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:42:09 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:16:20 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <stdlib.h>
 # include <limits.h>
 # include "libft/libft.h"
-
-# include <stdio.h>
 
 # define INV_CHARS " !\"#$%&'()*./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\
 ^_`abcdefghijklmnopqrstuvwxyz{|}~"

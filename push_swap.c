@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:39:27 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:08:46 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:14:09 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	ft_is_sorted(t_list *stack)
 	return (1);
 }
 
-void	ft_print_content(void *s)
-{
-	printf("%d ", *(int *)s);
-	return ;
-}
+// void	ft_print_content(void *s)
+// {
+// 	printf("%d ", *(int *)s);
+// 	return ;
+// }
 
 t_list	*ft_load_stck_a(int *argc, char **argv)
 {
@@ -128,7 +128,7 @@ int	main(int argc, char **argv)
 		ft_sort_three(&stack_a);
 		while (stack_a != ft_find_min(stack_a))
 			ft_rev_rot_a(&stack_a);
-		return (ft_lstiter(stack_a, ft_print_content), ft_lstclear(&stack_a, free), 0);
+		return (ft_lstclear(&stack_a, free), 0);
 	}
 	content = ft_strdup("Eliminar este nodo");
 	stack_b = ft_lstnew(content);
@@ -136,8 +136,6 @@ int	main(int argc, char **argv)
 		return (1);
 	ft_push_swap_a(&stack_a, &stack_b);
 	ft_push_swap_b(&stack_a, &stack_b);
-	ft_lstiter(stack_a, ft_print_content);
-	printf("\n");
 	ft_lstclear(&stack_a, free);
 	return (0);
 }
