@@ -39,6 +39,7 @@ long	ft_atol(const char *str)
 	long	r;
 	int		digit;
 
+	r = 0;
 	i = 0;
 	sign = 1;
 	if (!str)
