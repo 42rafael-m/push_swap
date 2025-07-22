@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:39:27 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:08:46 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/07/21 14:32:12 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	ft_is_sorted(t_list *stack)
 	return (1);
 }
 
-void	ft_print_content(void *s)
-{
-	printf("%d ", *(int *)s);
-	return ;
-}
+// void	ft_print_content(void *s)
+// {
+// 	printf("%d ", *(int *)s);
+// 	return ;
+// }
 
 t_list	*ft_load_stck_a(int *argc, char **argv)
 {
@@ -99,14 +99,14 @@ t_list	*ft_load_stck_a(int *argc, char **argv)
 			return (write(2, "Error\n", 6), NULL);
 		*argc = ft_doubleptr_len(argv);
 		if (ft_valid_args(*argc, argv) == 1)
-			return (ft_free_d(argv), write(2, "Error\n", 6), NULL);
+			return (ft_free_d(argv), NULL);
 		stack_a = ft_stack_a(*argc, argv);
 		ft_free_d(argv);
 	}
 	else
 	{
 		if (ft_valid_args(*argc, argv) == 1)
-			return (write(2, "Error\n", 6), NULL);
+			return (NULL);
 		stack_a = ft_stack_a(*argc, argv);
 	}
 	return (stack_a);
@@ -116,28 +116,22 @@ int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
-	char	*content;
 
 	if (argc <= 1)
-		return (write(2, "Error\n", 6), 1);
+		return (0);
 	stack_a = ft_load_stck_a(&argc, argv);
-	if (!stack_a)
-		return (write(2, "Error\n", 6), 1);
+	if (!stack_a || ft_rep_content(stack_a))
+		return (write(2, "Error\n", 6), ft_lstclear(&stack_a, free), 1);
 	if (argc <= 4)
 	{
 		ft_sort_three(&stack_a);
 		while (stack_a != ft_find_min(stack_a))
 			ft_rev_rot_a(&stack_a);
-		return (ft_lstiter(stack_a, ft_print_content), ft_lstclear(&stack_a, free), 0);
+		return (ft_lstclear(&stack_a, free), 0);
 	}
-	content = ft_strdup("Eliminar este nodo");
-	stack_b = ft_lstnew(content);
-	if (!stack_b)
-		return (1);
+	stack_b = NULL;
 	ft_push_swap_a(&stack_a, &stack_b);
 	ft_push_swap_b(&stack_a, &stack_b);
-	ft_lstiter(stack_a, ft_print_content);
-	printf("\n");
 	ft_lstclear(&stack_a, free);
 	return (0);
 }
