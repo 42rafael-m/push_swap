@@ -101,7 +101,7 @@ int	ft_push_swap_a(t_list **stack_a, t_list **stack_b)
 	while (ft_lstsize(*stack_a) > 3)
 	{
 		ft_choose_target_a(stack_a, stack_b, INT_MAX);
-		ft_push_a(stack_a, stack_b);
+		ft_push_b(stack_a, stack_b);
 	}
 	ft_sort_three(stack_a);
 	return (0);

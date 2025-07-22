@@ -58,7 +58,7 @@ void	ft_swap_s(t_list **stack_a, t_list **stack_b)
 	return ;
 }
 
-void	ft_push_b(t_list **stack_b, t_list **stack_a)
+void	ft_push_a(t_list **stack_b, t_list **stack_a)
 {
 	t_list	*t;
 
@@ -68,11 +68,11 @@ void	ft_push_b(t_list **stack_b, t_list **stack_a)
 	*stack_b = t -> next;
 	t -> next = *stack_a;
 	*stack_a = t;
-	write(1, "pb\n", 3);
+	write(1, "pa\n", 3);
 	return ;
 }
 
-void	ft_push_a(t_list **stack_a, t_list **stack_b)
+void	ft_push_b(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*t;
 
@@ -82,6 +82,6 @@ void	ft_push_a(t_list **stack_a, t_list **stack_b)
 	*stack_a = t -> next;
 	t -> next = *stack_b;
 	*stack_b = t;
-	write(1, "pa\n", 3);
+	write(1, "pb\n", 3);
 	return ;
 }

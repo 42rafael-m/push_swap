@@ -22,7 +22,7 @@ int	ft_push_swap_b(t_list **stack_a, t_list **stack_b)
 	while (ft_lstsize(*stack_b) > 0)
 	{
 		ft_choose_target_b(stack_b, stack_a, INT_MAX);
-		ft_push_b(stack_b, stack_a);
+		ft_push_a(stack_b, stack_a);
 	}
 	op = ft_choose_op(*stack_a, ft_find_min(*stack_a));
 	ft_rot_cost(op, 0, stack_a, stack_a);

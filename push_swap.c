@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+#include <stdio.h>
 int	ft_valid_args(int argc, char **argv)
 {
 	size_t	len;
@@ -26,16 +26,16 @@ int	ft_valid_args(int argc, char **argv)
 		len = ft_strlen(argv[argc]);
 		if (!len && argv[argc][0] != 0)
 			return (1);
-		while (i < ft_strlen(argv[argc]))
-		{
-			if (ft_atol(argv[argc]) > INT_MAX || ft_atol(argv[argc]) < INT_MIN)
-				return (1);
-			if (ft_strchr(INV_CHARS, argv[argc][i]))
-				return (1);
-			i++;
-		}
 		if ((argv[argc][0] != 48) && (ft_atoi(argv[argc]) == 0))
 			return (1);
+		if (ft_atoi(argv[argc]) == 0 && (ft_strncmp(argv[argc], "0", len)
+		!= 48 && len > 1))
+			return (1);
+		while (i < ft_strlen(argv[argc]))
+		{
+			if (ft_strchr(INV_CHARS, argv[argc][i++]))
+				return (1);
+		}
 		argc--;
 	}
 	return (0);

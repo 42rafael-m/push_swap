@@ -48,11 +48,11 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 		return (0);
 	return ((unsigned char )*s1 - (unsigned char )*s2);
 }
-/*
-int	main(void)
+
+/* int	main(void)
 {
-	char	*s1 = "asde";
-	char	*s2 = "asd";
+	char	*s1 = "0000000";
+	char	*s2 = "0";
 	int	result;
 	int	n = 10;
 
@@ -60,5 +60,5 @@ int	main(void)
 	printf("result = %d\n", result);
 	result = strncmp(s1, s2, n);
 	printf("result = %d\n", result);
-}
-*/
+} */
+
