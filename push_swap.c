@@ -6,12 +6,12 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 19:39:27 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/21 14:32:12 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 11:12:44 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
 int	ft_valid_args(int argc, char **argv)
 {
 	size_t	len;
@@ -29,7 +29,7 @@ int	ft_valid_args(int argc, char **argv)
 		if ((argv[argc][0] != 48) && (ft_atoi(argv[argc]) == 0))
 			return (1);
 		if (ft_atoi(argv[argc]) == 0 && (ft_strncmp(argv[argc], "0", len)
-		!= 48 && len > 1))
+				!= 48 && len > 1))
 			return (1);
 		while (i < ft_strlen(argv[argc]))
 		{
