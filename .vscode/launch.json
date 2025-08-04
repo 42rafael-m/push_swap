@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/rms35/Documents/42/Cursus/push_swap",
-      "program": "/home/rms35/Documents/42/Cursus/push_swap/build/Debug/outDebug",
+      "cwd": "/home/rafael-m/Documents/42/Cursus/push_swap",
+      "program": "/home/rafael-m/Documents/42/Cursus/push_swap/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
