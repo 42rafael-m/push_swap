@@ -2,7 +2,7 @@ NAME = push_swap
 LIBFT_A = libft/libft.a
 SRC = push_swap.c push_swap_utils.c push_swap_utils1.c push_swap_utils2.c push_swap_utils3.c push_swap_utils4.c push_swap_utils5.c
 OBJ = $(SRC:.c=.o)
-CFLAGS += -Wall -Wextra -Werror -Ilibft
+CFLAGS += -g -Wall -Wextra -Werror -Ilibft
 
 all: $(NAME)
 

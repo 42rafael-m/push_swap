@@ -6,7 +6,7 @@
 /*   By: rafael-m <rafael-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 21:07:38 by rafael-m          #+#    #+#             */
-/*   Updated: 2025/07/20 21:41:15 by rafael-m         ###   ########.fr       */
+/*   Updated: 2025/08/04 11:46:18 by rafael-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_rotate_a(t_list **stack)
 	t = ft_lstlast(*stack);
 	t -> next = start;
 	start -> next = NULL;
-	write(1, "ra\n", 4);
+	write(1, "ra\n", 3);
 	return ;
 }
 
@@ -57,7 +57,7 @@ void	ft_rotate_b(t_list **stack)
 	t = ft_lstlast(*stack);
 	t -> next = start;
 	start -> next = NULL;
-	write(1, "rb\n", 4);
+	write(1, "rb\n", 3);
 	return ;
 }
 
@@ -78,7 +78,7 @@ void	ft_rotate_r(t_list **stack_a, t_list **stack_b)
 	t = ft_lstlast(*stack_b);
 	t -> next = start;
 	start -> next = NULL;
-	write(1, "rr\n", 4);
+	write(1, "rr\n", 3);
 	return ;
 }
 
