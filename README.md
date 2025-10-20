@@ -113,6 +113,13 @@
 - **Operaciones primitivas**: `ft_swap_*`, `ft_push_*`, `ft_rotate_*`, `ft_rev_rot_*` encapsulan las instrucciones del problema y garantizan que cada acción quede reflejada en la salida estándar.
 - **Soporte `libft`**: provee listas enlazadas, utilidades de strings y conversiones numéricas imprescindibles para parseo y manipulación de datos.
 
+## Algoritmo Turkish en este proyecto
+- Objetivo: mantener `stack_b` en orden decreciente mientras se reduce el tamaño de `stack_a`, de modo que cada operación `pa` posterior coloque el elemento en el lugar correcto con la menor cantidad de movimientos.
+- Selección adaptativa: `ft_choose_target_a` recorre `stack_a` calculando para cada nodo el coste combinado de llevarlo a la cima (rotación positiva o negativa) y de alinear su posición destino en `stack_b` (`ft_find_node_target_b`). Se queda con el candidato que minimiza la suma absoluta de movimientos (`ft_abs(ft_choose_op(...))`), replicando la heurística central del algoritmo Turkish.
+- Sincronización de rotaciones: `ft_rot_cost` y `ft_rot_cos` agrupan rotaciones dobles (`rr`, `rrr`) cuando ambas pilas requieren el mismo sentido, evitando movimientos redundantes antes de ejecutar `pb` o `pa`.
+- Reconstrucción ordenada: durante `ft_push_swap_b` se invierte el proceso, esta vez eligiendo el nodo óptimo de `stack_b` mediante `ft_choose_target_b`, que usa `ft_find_node_target_a` para localizar el punto de inserción en `stack_a`. La invariant es que `stack_a` se mantiene creciente tras cada `pa`.
+- Ajuste final: `ft_choose_op(*stack_a, ft_find_min(*stack_a))` produce la rotación mínima para dejar el elemento más pequeño en la cima, completando el orden ascendente exigido por push_swap.
+
 ## Flujo de trabajo
 - Parseo de argumentos y conversión a enteros almacenados en la pila A.
 - Caso base: ordenaciones pequeñas con `ft_sort_two`, `ft_sort_three`, `ft_sort_four`.
