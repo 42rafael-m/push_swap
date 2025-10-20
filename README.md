@@ -123,15 +123,15 @@
 ## Diagrama de arquitectura
 ```mermaid
 flowchart TD
-    Main[main()\npush_swap.c]
-    Loader[ft_load_stck_a\nparse & validar]
-    Guard[ft_valid_args / ft_rep_content]
-    Builder[ft_stack_a\ncreación de pila A]
-    Small[ft_sort_three / helpers\ncasos pequeños]
-    PhaseA[ft_push_swap_a\nselección y push a B]
-    PhaseB[ft_push_swap_b\nreinserción ordenada]
-    Ops[Operaciones primitivas\nswap/push/rotate]
-    Libft[libft\nlistas y utilidades]
+    Main["main()<br/>push_swap.c"]
+    Loader["ft_load_stck_a<br/>parse y validar"]
+    Guard["ft_valid_args / ft_rep_content"]
+    Builder["ft_stack_a<br/>creación de pila A"]
+    Small["ft_sort_three / helpers<br/>casos pequeños"]
+    PhaseA["ft_push_swap_a<br/>selección y push a B"]
+    PhaseB["ft_push_swap_b<br/>reinserción ordenada"]
+    Ops["Operaciones primitivas<br/>swap/push/rotate"]
+    Libft["libft<br/>listas y utilidades"]
 
     Main --> Loader --> Guard --> Builder
     Builder --> Small
@@ -140,4 +140,3 @@ flowchart TD
     Ops --> Libft
     Libft --> Builder
 ```
-
