@@ -1,28 +1,25 @@
-# Push_swap
+# 42 Core: Push_swap
 
-*This project was created as part of the 42 curriculum by rafael-m.*
+Highly optimized sorting algorithm using two stacks - 42 Core Project.
 
-![C](https://img.shields.io/badge/language-C-blue.svg)
-![42](https://img.shields.io/badge/42-School-black.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+[![Language: C](https://img.shields.io/badge/language-C-blue.svg)](https://github.com/rms35/42-core-push-swap)
+[![42 School](https://img.shields.io/badge/42-School-black.svg)](https://github.com/42School)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-## Description
-`push_swap` is a highly efficient C project focused on algorithmic optimization. The goal is simple: sort a stack of integers using a second auxiliary stack and a limited set of operations, aiming for the absolute minimum number of moves.
+## 🛠 Setup
 
-This implementation utilizes a **Greedy Cost-Based Algorithm** (often referred to as the "Turk Algorithm"), which calculates the mechanical cost of every possible move to select the most efficient one at each step.
+The project uses a standard 42 Makefile with robust rules.
 
-## Instructions
-
-### Compilation
-The project uses a robust `Makefile` with standard 42 rules.
 ```bash
 make        # Compiles the push_swap binary
 make debug  # Compiles with AddressSanitizer and debug symbols
 make fclean # Removes all binaries and object files
 ```
 
-### Execution
+## 🚀 Usage
+
 Provide a list of unique integers as arguments. The program outputs the sequence of instructions to sort them.
+
 ```bash
 ./push_swap 5 2 8 1 9
 ```
@@ -32,53 +29,24 @@ To verify the move count:
 ARG="5 2 8 1 9"; ./push_swap $ARG | wc -l
 ```
 
-## Structures & Algorithms
+## 🏗 Architecture
 
 ### The Turk Algorithm (Greedy Cost-Based)
-Instead of using fixed chunks or simple pivots, this implementation evaluates the **cost** of moving each element from Stack A to its correct relative position in Stack B.
-- **Cost Calculation**: It accounts for the number of rotations needed for both the element in A and its target in B.
-- **Simultaneous Rotations**: The algorithm prioritizes moves where `rr` (rotate both) or `rrr` (reverse rotate both) can be used to reduce the total operation count.
-- **Efficiency**: Achieves ~500-600 moves for 100 random numbers and ~5000-5500 for 500 numbers, comfortably passing 42's high-performance benchmarks.
+Instead of using fixed chunks or simple pivots, this implementation evaluates the cost of moving each element from Stack A to its correct relative position in Stack B.
+
+- **Cost Calculation:** Accounts for the rotations needed for both the element in A and its target in B.
+- **Simultaneous Rotations:** Prioritizes moves where \`rr\` or \`rrr\` can be used to reduce the total operation count.
+- **Efficiency:** Achieves ~500-600 moves for 100 random numbers and ~5000-5500 for 500 numbers.
 
 ### Data Structures
-- **Circular Linked List**: Built upon a modified `libft` list structure.
-- **Direct Pointer Storage**: Optimized memory by storing integer values directly in `void *` pointers to avoid redundant heap allocations for every node's content.
+- **Circular Linked List:** Built upon a modified \`libft\` list structure.
+- **Direct Pointer Storage:** Optimized memory by storing integer values directly in \`void *\` pointers to avoid redundant heap allocations for every node's content.
 
-### Execution Flow
-```mermaid
-graph TD
-    A[Start] --> B{Args Valid?}
-    B -- No --> C[Error
-Exit]
-    B -- Yes --> D[Load Stack A]
-    D --> E{Sorted?}
-    E -- Yes --> F[Clean & Exit]
-    E -- No --> G{Size <= 3?}
-    G -- Yes --> H[Sort Three]
-    G -- No --> I[Push Two to B]
-    I --> J[Move Cheapest to B
-Until A has 3]
-    J --> K[Sort Three in A]
-    K --> L[Move back to A
-In Correct Position]
-    L --> M[Final Rotation
-to Align Min]
-    M --> F
-```
+## ⚖️ Trade-offs
 
-## Resources
-- [The "Turk Algorithm" Concept](https://medium.com/@ayogun/push-swap-c1f5d2d41e97)
-- [42 School Norminette V4](https://github.com/42School/norminette)
-
-### AI Usage
-This project was refined and audited using the **Gemini CLI**. AI assistance was specifically utilized for:
-- **Algorithmic Refinement**: Optimizing the `ft_calculate_cost` function to precisely account for simultaneous rotations (`rr`/`rrr`).
-- **Memory Auditing**: Identifying and fixing memory leaks in error paths and optimizing the node storage strategy.
-- **Safety Hardening**: Implementing robust argument validation to handle edge cases like integer overflows and complex string inputs.
+- **Greedy vs. Radix/Quicksort:** While Radix sort is easier to implement for bitwise sorting, it often results in more moves for small to medium sets. Quicksort/Merge sort are harder to adapt to two-stack constraints. The Turk Algorithm was chosen for its superior move-count performance, which is critical for the 42 grading benchmarks.
+- **Pointer Storage:** Storing \`int\` values directly in \`void *\` saves memory and speed but requires careful casting. This was chosen to minimize heap fragmentation.
+- **Performance vs. Complexity:** The greedy approach is $O(n^2)$ in the worst case for move selection but $O(1)$ in memory (beyond the stacks). Given $n=500$, the complexity is negligible compared to the move optimization gains.
 
 ---
-
-### Key Features
-- **Zero Memory Leaks**: Verified with AddressSanitizer and Valgrind.
-- **High Performance**: Well below the move limits for both 100 and 500 number benchmarks.
-- **Error Resilience**: Handles invalid characters, duplicates, and overflows with standard-compliant error messaging.
+*This project was refined and audited using the Gemini CLI.*
